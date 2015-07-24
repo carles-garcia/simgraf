@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
-abstract public class ListGraph<V, E extends AbstractEdge> {
+public abstract class ListGraph<V, E extends AbstractEdge> implements Graph {
     HashMap<V, E> edgeList;
 
 }

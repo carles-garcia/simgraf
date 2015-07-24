@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
-abstract public class MatrixGraph<V,E extends AbstractEdge> {
+public abstract class MatrixGraph<V,E extends AbstractEdge> implements Graph{
     HashMap<V,Integer> vertices;
     ArrayList<ArrayList<Integer>> adjacencyMatrix;
     ArrayList<E> edges;

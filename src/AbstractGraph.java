@@ -1,4 +1,4 @@
 // Created on 24/07/15.
-abstract public class AbstractGraph<T, E extends AbstractEdge<T>> {
+public abstract class AbstractGraph<T, E extends AbstractEdge<T>> {
 
 }
