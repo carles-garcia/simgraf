@@ -9,9 +9,11 @@ public abstract class ListGraph<V, E extends Edge<V>> implements Graph<V,E> {
 
     /**
      * Add vertex to the graph
-     * @param vertex if it's already in the graph, nothing happens
+     * @param vertex Must not be null. If it's already in the graph, nothing happens
      */
     public void add(V vertex) {
+        // Null vertices can't be added, therefore there will never be null vertices
+        Objects.requireNonNull(vertex, "vertex is null");
         if (!edgeList.containsKey(vertex)) edgeList.put(vertex, new HashSet<E>());
     }
 
@@ -27,35 +29,6 @@ public abstract class ListGraph<V, E extends Edge<V>> implements Graph<V,E> {
         edgeList.remove(vertex);
     }
 
-    public void add(V vertex1, V vertex2) {
-        if (!areAdjacent(vertex1,vertex2)) {
-       // Instantiate new E     edgeList.get(vertex1).add(new E(vertex1,vertex2));
-        }
-    }
-
-    /**
-     * Remove the edge between two vertices, if it exists
-     * @param vertex1 must be contained in the graph
-     * @param vertex2 must be contained in the graph
-     */
-    public void remove(V vertex1, V vertex2) {
-        Objects.requireNonNull(vertex1, "vertex1 is null");
-        Objects.requireNonNull(vertex2, "vertex2 is null");
-        for (E edge : Objects.requireNonNull(edgeList.get(vertex1), "vertex1 is not contained in the graph")) {
-            if (edge.getVertex1().equals(vertex1) ?
-                    edge.getVertex2().equals(vertex2) : edge.getVertex1().equals(vertex2)) {
-                edgeList.get(vertex1).remove(edge);
-                break;
-            }
-        }
-        for (E edge : Objects.requireNonNull(edgeList.get(vertex2), "vertex2 is not contained in the graph")) {
-            if (edge.getVertex1().equals(vertex2) ?
-                    edge.getVertex2().equals(vertex1) : edge.getVertex1().equals(vertex1)) {
-                edgeList.get(vertex2).remove(edge);
-                break;
-            }
-        }
-    }
 
     public void add(E edge) {
         if (!areAdjacent(edge.getVertex1(),edge.getVertex2())) {
@@ -79,6 +52,9 @@ public abstract class ListGraph<V, E extends Edge<V>> implements Graph<V,E> {
     }
 
     public boolean areAdjacent(V vertex1, V vertex2) {
+        if (!contains(vertex1)) throw new IllegalArgumentException("vertex1 is not contained in the graph");
+        else if (!contains(vertex2)) throw new IllegalArgumentException("vertex2 is not contained in the graph");
+
         for (E edge : edgeList.get(vertex1)) {
             if (edge.getVertex1().equals(vertex1) ?
                     edge.getVertex2().equals(vertex2) : edge.getVertex1().equals(vertex2))
