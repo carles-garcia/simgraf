@@ -51,7 +51,7 @@ public abstract class ListGraph<V, E extends Edge<V>> implements InterfaceGraph<
     public void remove(V vertex) {
         for (E edge : Objects.requireNonNull(edgeList.get(vertex), "Tried to remove a vertex not contained in the graph")) {
             edgeList.get
-                    (edge.getVertex1().equals(vertex) ? edge.getVertex2() : edge.getVertex1()).remove(edge);
+                    (edge.getVertexA().equals(vertex) ? edge.getVertexB() : edge.getVertexA()).remove(edge);
         }
         edgeList.remove(vertex);
     }
@@ -63,9 +63,9 @@ public abstract class ListGraph<V, E extends Edge<V>> implements InterfaceGraph<
     public void add(E edge) {
         Objects.requireNonNull(edge, "Tried to add a null edge");
         // in a simple graph, here would be the check for loops
-        if (!areAdjacent(edge.getVertex1(), edge.getVertex2())) {
-            edgeList.get(edge.getVertex1()).add(edge);
-            edgeList.get(edge.getVertex2()).add(edge);
+        if (!areAdjacent(edge.getVertexA(), edge.getVertexB())) {
+            edgeList.get(edge.getVertexA()).add(edge);
+            edgeList.get(edge.getVertexB()).add(edge);
             ++size;
         }
         else throw new IllegalArgumentException("There is already an edge between the parameter's endpoints");
@@ -77,47 +77,47 @@ public abstract class ListGraph<V, E extends Edge<V>> implements InterfaceGraph<
      */
     public void remove(E edge) {
         Objects.requireNonNull(edge, "Tried to remove a null edge");
-        if (!areAdjacent(edge.getVertex1(), edge.getVertex2())
-                | !edgeList.get(edge.getVertex1()).remove(edge)
-                | !edgeList.get(edge.getVertex2()).remove(edge))
+        if (!areAdjacent(edge.getVertexA(), edge.getVertexB())
+                | !edgeList.get(edge.getVertexA()).remove(edge)
+                | !edgeList.get(edge.getVertexB()).remove(edge))
             throw new IllegalArgumentException("Tried to remove an edge not contained in the graph");
         --size;
     }
 
     /**
      * Get edge between two adjacent vertices
-     * @param vertex1 Must not be null.
-     * @param vertex2 Must not be null.
-     * @return edge between vertex1 and vertex2.
+     * @param vertexA Must not be null.
+     * @param vertexB Must not be null.
+     * @return edge between vertexA and vertexB.
      */
-    public E getEdge(V vertex1, V vertex2) {
-        if (!contains(vertex1)) throw new IllegalArgumentException("vertex1 is not contained in the graph");
-        if (!contains(vertex2)) throw new IllegalArgumentException("vertex2 is not contained in the graph");
-        for (E edge : edgeList.get(vertex1)) {
-            if (edge.getVertex1().equals(vertex1) ?
-                    edge.getVertex2().equals(vertex2) : edge.getVertex1().equals(vertex2))
+    public E getEdge(V vertexA, V vertexB) {
+        if (!contains(vertexA)) throw new IllegalArgumentException("vertexA is not contained in the graph");
+        if (!contains(vertexB)) throw new IllegalArgumentException("vertexB is not contained in the graph");
+        for (E edge : edgeList.get(vertexA)) {
+            if (edge.getVertexA().equals(vertexA) ?
+                    edge.getVertexB().equals(vertexB) : edge.getVertexA().equals(vertexB))
                 return edge;
         }
-        throw new IllegalArgumentException("vertex1 & vertex2 are not adjacent");
+        throw new IllegalArgumentException("vertexA & vertexB are not adjacent");
     }
 
     /**
      * Returns true if two vertices are adjacent
-     * @param vertex1 Has to be contained in the graph.
-     * @param vertex2 Has to be contained in the graph.
-     * @return True if vertex1 and vertex2 are adjacent.
+     * @param vertexA Has to be contained in the graph.
+     * @param vertexB Has to be contained in the graph.
+     * @return True if vertexA and vertexB are adjacent.
      */
-    public boolean areAdjacent(V vertex1, V vertex2) {
+    public boolean areAdjacent(V vertexA, V vertexB) {
         /*
         This method checks if the vertices are contained in the graph, therefore any method using this one
         doesn't need to check it again.
          */
         // Should be optimised considering which vertex has less edges
-        if (!contains(vertex1)) throw new IllegalArgumentException("vertex1 is not contained in the graph");
-        else if (!contains(vertex2)) throw new IllegalArgumentException("vertex2 is not contained in the graph");
-        for (E edge : edgeList.get(vertex1)) {
-            if (edge.getVertex1().equals(vertex1) ?
-                    edge.getVertex2().equals(vertex2) : edge.getVertex1().equals(vertex2))
+        if (!contains(vertexA)) throw new IllegalArgumentException("vertexA is not contained in the graph");
+        else if (!contains(vertexB)) throw new IllegalArgumentException("vertexB is not contained in the graph");
+        for (E edge : edgeList.get(vertexA)) {
+            if (edge.getVertexA().equals(vertexA) ?
+                    edge.getVertexB().equals(vertexB) : edge.getVertexA().equals(vertexB))
                 return true;
         }
         return false;
@@ -174,7 +174,7 @@ public abstract class ListGraph<V, E extends Edge<V>> implements InterfaceGraph<
         checkContained(vertex);
         HashSet<V> hs = new HashSet<>();
         for (E edge: edgeList.get(vertex))
-            hs.add(edge.getVertex1().equals(vertex) ? edge.getVertex2() : edge.getVertex1());
+            hs.add(edge.getVertexA().equals(vertex) ? edge.getVertexB() : edge.getVertexA());
         return hs;
     }
 

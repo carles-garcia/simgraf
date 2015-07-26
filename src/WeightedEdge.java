@@ -1,8 +1,8 @@
-public class WeightedEdge<V> extends Edge<V> {
+public class WeightedEdge<V> extends Edge<V> implements InterfaceWeighted  {
     private Double weight;
 
-    public WeightedEdge(V vertex1, V vertex2, Double weight) {
-        super(vertex1,vertex2);
+    public WeightedEdge(V vertexA, V vertexB, Double weight) {
+        super(vertexA,vertexB);
         this.weight = weight;
     }
 

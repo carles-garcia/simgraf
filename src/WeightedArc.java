@@ -1,8 +1,16 @@
-public class WeightedArc<V> extends  WeightedEdge<V> {
-    public WeightedArc(V from, V to, Double weight) {
-        super(from,to,weight);
+public class WeightedArc<V> extends Arc<V> implements InterfaceWeighted {
+    private Double weight;
+
+    public WeightedArc(V vertexA, V vertexB, Double weight) {
+        super(vertexA,vertexB);
+        this.weight = weight;
     }
 
-    public V getFrom() { return getVertex1(); }
-    public V getTo() { return getVertex2(); }
+    public void setWeight(Double weight) {
+        this.weight = weight;
+    }
+
+    public Double getWeight() {
+        return weight;
+    }
 }

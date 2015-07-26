@@ -1,10 +1,7 @@
-public class Arc<V> extends Edge<V> {
-    public Arc(V from, V to) {
-        super(from,to);
+public class Arc<V> extends AbstractEdge<V> {
+
+    public Arc(V vertexA, V vertexB) {
+        super(vertexA,vertexB,EdgeType.DIRECTED);
     }
 
-    public V getFrom() { return getVertex1(); }
-    public V getTo() { return getVertex2(); }
 }
-
-//alternative: A and B

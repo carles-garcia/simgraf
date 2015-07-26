@@ -6,9 +6,9 @@ public interface InterfaceGraph<V, E extends Edge<V>> {
 
     void add(E edge);
     void remove(E edge);
-    E getEdge(V vertex1, V vertex2);
+    E getEdge(V vertexA, V vertexB);
 
-    boolean areAdjacent(V vertex1, V vertex2);
+    boolean areAdjacent(V vertexA, V vertexB);
     boolean contains(V vertex);
 
     Collection<V> getVertices();
