@@ -15,4 +15,7 @@ public interface Graph<V, E extends Edge<V>> {
     Collection<E> getEdges();
 
     int degree(V vertex);
+
+    Collection<V> getNeighbours(V vertex);
+    Collection<E> getEdges(V vertex);
 }
