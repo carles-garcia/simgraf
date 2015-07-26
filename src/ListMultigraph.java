@@ -7,8 +7,7 @@ public class ListMultigraph<V, E extends Edge<V>>
 
 
     /**
-     * Add an edge to the graph.
-     * @param edge Must not be null. Its endpoints have to be contained in the graph.
+     * {@inheritDoc}
      */
     public void add(E edge) {
         Objects.requireNonNull(edge, "Tried to add a null edge");
@@ -25,7 +24,7 @@ public class ListMultigraph<V, E extends Edge<V>>
     public Set<E> getEdges(V vertexA, V vertexB) {
         checkContained(vertexA);
         checkContained(vertexB);
-        HashSet hs = new HashSet();
+        HashSet<E> hs = new HashSet<>();
         for (E edge : edgeList.get(vertexA)) {
             if (edge.getVertexA().equals(vertexA) ?
                     edge.getVertexB().equals(vertexB) : edge.getVertexA().equals(vertexB))
@@ -34,6 +33,12 @@ public class ListMultigraph<V, E extends Edge<V>>
         return hs;
     }
 
+    /**
+     * Numer of edges between two vertices
+     * @param vertexA Has to be contained in the graph.
+     * @param vertexB Has to be contained in the graph.
+     * @return int number of edges between vertexA and vertexB
+     */
     public int numberOfEdges(V vertexA, V vertexB) {
         checkContained(vertexA);
         checkContained(vertexB);

@@ -1,6 +1,6 @@
 import java.util.*;
 
-public abstract class ListGraph<V, E extends Edge<V>> implements InterfaceGraph<V,E> {
+public class ListGraph<V, E extends Edge<V>> implements InterfaceGraph<V,E> {
     /*
     Incidence list representation.
     Order of insertion of vertices is not saved
@@ -34,8 +34,7 @@ public abstract class ListGraph<V, E extends Edge<V>> implements InterfaceGraph<
     }
 
     /**
-     * Add vertex to the graph
-     * @param vertex Must not be null. Must not be already contained in the graph.
+     * {@inheritDoc}
      */
     public void add(V vertex) {
         // Null vertices can't be added, therefore a graph will never contain null vertices
@@ -45,8 +44,7 @@ public abstract class ListGraph<V, E extends Edge<V>> implements InterfaceGraph<
     }
 
     /**
-     * Remove vertex and its incident edges from the graph
-     * @param vertex has to be contained in the graph
+     * {@inheritDoc}
      */
     public void remove(V vertex) {
         for (E edge : Objects.requireNonNull(edgeList.get(vertex), "Tried to remove a vertex not contained in the graph")) {
@@ -56,10 +54,7 @@ public abstract class ListGraph<V, E extends Edge<V>> implements InterfaceGraph<
         edgeList.remove(vertex);
     }
 
-    /**
-     * Add an edge to the graph.
-     * @param edge Must not be null. Its endpoints have to be contained in the graph and can't be already adjacent.
-     */
+
     public void add(E edge) {
         Objects.requireNonNull(edge, "Tried to add a null edge");
         // in a simple graph, here would be the check for loops
