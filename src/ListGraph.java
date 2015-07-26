@@ -14,14 +14,14 @@ public abstract class ListGraph<V, E extends Edge<V>> implements InterfaceGraph<
     A graph with 100 vertices would contain at least 100.000 references
 
      */
-    private HashMap<V, HashSet<E>> edgeList;
-    private int size; // number of edges
+    protected HashMap<V, HashSet<E>> edgeList;
+    protected int size; // number of edges
 
     /*
     If the vertex isn't contained in the graph (and this is true for a null reference) throws
     an IllegalArgumenException
      */
-    private void checkContained(V vertex) {
+    protected void checkContained(V vertex) {
         if (!contains(vertex)) throw new IllegalArgumentException("The vertex is not contained in the graph");
     }
 
@@ -91,8 +91,8 @@ public abstract class ListGraph<V, E extends Edge<V>> implements InterfaceGraph<
      * @return edge between vertexA and vertexB.
      */
     public E getEdge(V vertexA, V vertexB) {
-        if (!contains(vertexA)) throw new IllegalArgumentException("vertexA is not contained in the graph");
-        if (!contains(vertexB)) throw new IllegalArgumentException("vertexB is not contained in the graph");
+        checkContained(vertexA);
+        checkContained(vertexB);
         for (E edge : edgeList.get(vertexA)) {
             if (edge.getVertexA().equals(vertexA) ?
                     edge.getVertexB().equals(vertexB) : edge.getVertexA().equals(vertexB))
@@ -112,9 +112,9 @@ public abstract class ListGraph<V, E extends Edge<V>> implements InterfaceGraph<
         This method checks if the vertices are contained in the graph, therefore any method using this one
         doesn't need to check it again.
          */
+        checkContained(vertexA);
+        checkContained(vertexB);
         // Should be optimised considering which vertex has less edges
-        if (!contains(vertexA)) throw new IllegalArgumentException("vertexA is not contained in the graph");
-        else if (!contains(vertexB)) throw new IllegalArgumentException("vertexB is not contained in the graph");
         for (E edge : edgeList.get(vertexA)) {
             if (edge.getVertexA().equals(vertexA) ?
                     edge.getVertexB().equals(vertexB) : edge.getVertexA().equals(vertexB))
