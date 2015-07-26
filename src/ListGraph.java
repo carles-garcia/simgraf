@@ -1,11 +1,21 @@
 import java.util.*;
 
-public abstract class ListGraph<V, E extends Edge<V>> implements Graph<V,E> {
+public abstract class ListGraph<V, E extends Edge<V>> implements InterfaceGraph<V,E> {
     /*
     Incidence list representation.
     Order of insertion of vertices is not saved
+
+    Analysis of memory cost:
+    (1 + 2*degree) references to each vertex
+    A graph with 100 vertices would contain at least 100 references
+
+    An implementation with adjacency list:
+    (|V| + 2*degree) references to each vertex
+    A graph with 100 vertices would contain at least 100.000 references
+
      */
     private HashMap<V, HashSet<E>> edgeList;
+    private int size; // number of edges
 
     /*
     If the vertex isn't contained in the graph (and this is true for a null reference) throws
@@ -20,6 +30,7 @@ public abstract class ListGraph<V, E extends Edge<V>> implements Graph<V,E> {
      */
     public ListGraph() {
         edgeList = new HashMap<>();
+        size = 0;
     }
 
     /**
@@ -51,9 +62,11 @@ public abstract class ListGraph<V, E extends Edge<V>> implements Graph<V,E> {
      */
     public void add(E edge) {
         Objects.requireNonNull(edge, "Tried to add a null edge");
+        // in a simple graph, here would be the check for loops
         if (!areAdjacent(edge.getVertex1(), edge.getVertex2())) {
             edgeList.get(edge.getVertex1()).add(edge);
             edgeList.get(edge.getVertex2()).add(edge);
+            ++size;
         }
         else throw new IllegalArgumentException("There is already an edge between the parameter's endpoints");
     }
@@ -68,6 +81,7 @@ public abstract class ListGraph<V, E extends Edge<V>> implements Graph<V,E> {
                 | !edgeList.get(edge.getVertex1()).remove(edge)
                 | !edgeList.get(edge.getVertex2()).remove(edge))
             throw new IllegalArgumentException("Tried to remove an edge not contained in the graph");
+        --size;
     }
 
     /**
@@ -172,6 +186,15 @@ public abstract class ListGraph<V, E extends Edge<V>> implements Graph<V,E> {
     public Set<E> getEdges(V vertex) {
         checkContained(vertex);
         return edgeList.get(vertex);
+    }
+
+
+    public int order() {
+        return edgeList.size();
+    }
+
+    public int size() {
+        return size;
     }
 
 }

@@ -1,6 +1,6 @@
 import java.util.Collection;
 
-public interface Graph<V, E extends Edge<V>> {
+public interface InterfaceGraph<V, E extends Edge<V>> {
     void add(V vertex);
     void remove(V Vertex);
 
@@ -18,4 +18,7 @@ public interface Graph<V, E extends Edge<V>> {
 
     Collection<V> getNeighbours(V vertex);
     Collection<E> getEdges(V vertex);
+
+    int order(); // number of vertices
+    int size(); // number of edges
 }
