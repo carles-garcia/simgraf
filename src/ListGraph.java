@@ -22,7 +22,7 @@ public class ListGraph<V, E extends Edge<V>> implements InterfaceGraph<V,E> {
     an IllegalArgumenException
      */
     protected void checkContained(V vertex) {
-        if (!contains(vertex)) throw new IllegalArgumentException("The vertex is not contained in the graph");
+        if (!contains(vertex)) throw new IllegalArgumentException(Errors.VERTEX_NOT_CONTAINED.toString());
     }
 
     /**
@@ -33,58 +33,40 @@ public class ListGraph<V, E extends Edge<V>> implements InterfaceGraph<V,E> {
         size = 0;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void add(V vertex) {
         // Null vertices can't be added, therefore a graph will never contain null vertices
-        Objects.requireNonNull(vertex, "Tried to add a null vertex");
+        Objects.requireNonNull(vertex, Errors.ADD_NULL_VERTEX.toString());
         if (!edgeList.containsKey(vertex)) edgeList.put(vertex, new HashSet<E>());
-        else throw new IllegalArgumentException("The vertex is already contained in the graph");
+        else throw new IllegalArgumentException(Errors.VERTEX_CONTAINED.toString());
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public void remove(V vertex) {
-        for (E edge : Objects.requireNonNull(edgeList.get(vertex), "Tried to remove a vertex not contained in the graph")) {
+        for (E edge : Objects.requireNonNull(edgeList.get(vertex), Errors.VERTEX_NOT_CONTAINED.toString())) {
             edgeList.get
                     (edge.getVertexA().equals(vertex) ? edge.getVertexB() : edge.getVertexA()).remove(edge);
         }
         edgeList.remove(vertex);
     }
 
-
     public void add(E edge) {
-        Objects.requireNonNull(edge, "Tried to add a null edge");
-        // in a simple graph, here would be the check for loops
+        Objects.requireNonNull(edge, Errors.ADD_NULL_EDGE.toString());
         if (!areAdjacent(edge.getVertexA(), edge.getVertexB())) {
             edgeList.get(edge.getVertexA()).add(edge);
             edgeList.get(edge.getVertexB()).add(edge);
             ++size;
         }
-        else throw new IllegalArgumentException("There is already an edge between the parameter's endpoints");
+        else throw new IllegalArgumentException(Errors.ADD_EXISTING_EDGE.toString());
     }
 
-    /**
-     * Remove edge from the graph
-     * @param edge Must not be null. Has to be contained in the graph.
-     */
     public void remove(E edge) {
-        Objects.requireNonNull(edge, "Tried to remove a null edge");
+        Objects.requireNonNull(edge, Errors.REMOVE_NULL_EDGE.toString());
         if (!areAdjacent(edge.getVertexA(), edge.getVertexB())
                 | !edgeList.get(edge.getVertexA()).remove(edge)
                 | !edgeList.get(edge.getVertexB()).remove(edge))
-            throw new IllegalArgumentException("Tried to remove an edge not contained in the graph");
+            throw new IllegalArgumentException(Errors.EDGE_NOT_CONTAINED.toString());
         --size;
     }
 
-    /**
-     * Get edge between two adjacent vertices
-     * @param vertexA Must not be null.
-     * @param vertexB Must not be null.
-     * @return edge between vertexA and vertexB.
-     */
     public E getEdge(V vertexA, V vertexB) {
         checkContained(vertexA);
         checkContained(vertexB);
@@ -93,15 +75,9 @@ public class ListGraph<V, E extends Edge<V>> implements InterfaceGraph<V,E> {
                     edge.getVertexB().equals(vertexB) : edge.getVertexA().equals(vertexB))
                 return edge;
         }
-        throw new IllegalArgumentException("vertexA & vertexB are not adjacent");
+        throw new IllegalArgumentException(Errors.NOT_ADJACENT.toString());
     }
 
-    /**
-     * Returns true if two vertices are adjacent
-     * @param vertexA Has to be contained in the graph.
-     * @param vertexB Has to be contained in the graph.
-     * @return True if vertexA and vertexB are adjacent.
-     */
     public boolean areAdjacent(V vertexA, V vertexB) {
         /*
         This method checks if the vertices are contained in the graph, therefore any method using this one
@@ -118,28 +94,15 @@ public class ListGraph<V, E extends Edge<V>> implements InterfaceGraph<V,E> {
         return false;
     }
 
-    /**
-     * Returns true if the vertex is contained in the graph
-     * @param vertex vertex to test
-     * @return True if found
-     */
     public boolean contains(V vertex) {
         return edgeList.containsKey(vertex);
     }
 
-    /**
-     * Get all vertices in the graph
-     * @return set containing all vertices
-     */
     public Set<V> getVertices() {
         // Should specify about order
         return edgeList.keySet();
     }
 
-    /**
-     * Get all edges in the graph
-     * @return set containing all edges
-     */
     public Set<E> getEdges() {
         HashSet<E> edges = new HashSet<>();
         for (HashSet<E> s: edgeList.values()) {
@@ -150,21 +113,11 @@ public class ListGraph<V, E extends Edge<V>> implements InterfaceGraph<V,E> {
         return edges;
     }
 
-    /**
-     * Get degree of a vertex (number of incident edges).
-     * @param vertex Has to be contained in the graph.
-     * @return degree
-     */
     public int degree(V vertex) {
         checkContained(vertex);
         return edgeList.get(vertex).size();
     }
 
-    /**
-     * Get neighbours of a vertex (adjacent vertices)
-     * @param vertex Has to be contained in the graph.
-     * @return set containing neighbours
-     */
     public Set<V> getNeighbours(V vertex) {
         checkContained(vertex);
         HashSet<V> hs = new HashSet<>();
@@ -173,11 +126,7 @@ public class ListGraph<V, E extends Edge<V>> implements InterfaceGraph<V,E> {
         return hs;
     }
 
-    /**
-     * Get incident edges to a vertex
-     * @param vertex Has to be contained in the graph.
-     * @return set containing the edges
-     */
+
     public Set<E> getEdges(V vertex) {
         checkContained(vertex);
         return edgeList.get(vertex);
@@ -187,6 +136,7 @@ public class ListGraph<V, E extends Edge<V>> implements InterfaceGraph<V,E> {
     public int order() {
         return edgeList.size();
     }
+
 
     public int size() {
         return size;

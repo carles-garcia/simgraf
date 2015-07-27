@@ -8,7 +8,20 @@ public interface InterfaceMultigraph<V, E extends Edge<V>> extends InterfaceGrap
      */
     void add(E edge);
 
+    /**
+     * Get all edges between two vertices
+     * @param vertexA Has to be contained in the graph.
+     * @param vertexB Has to be contained in the graph.
+     * @return collection containing all edges between vertexA and vertexB
+     */
     Collection<E> getEdges(V vertexA, V vertexB);
+
+    /**
+     * Number of edges between two vertices
+     * @param vertexA Has to be contained in the graph.
+     * @param vertexB Has to be contained in the graph.
+     * @return int number of edges between vertexA and vertexB
+     */
     int numberOfEdges(V vertexA, V vertexB);
 
 }
