@@ -1,9 +1,12 @@
 import java.util.HashSet;
 import java.util.Set;
 
-public class MixedGraphS<V, E extends AbstractEdge<V>>
-        extends AbstractGraphS<V,E> implements InterfaceMixedGraph<V,E> //maybe its needed a mixed interface
-{
+public class MixedMultigraphS<V, E extends AbstractEdge<V>>
+        extends AbstractMultigraphS<V,E> implements InterfaceMixedGraph<V,E> {
+    /*
+       The 4 following methods are exactly the same as the methods
+       in MixedGraphS
+        */
     public int indegree(V vertex) {
         int ind = 0;
         for (E edge : edgeList.get(vertex)) {
@@ -41,5 +44,6 @@ public class MixedGraphS<V, E extends AbstractEdge<V>>
         }
         return hs;
     }
+
 
 }

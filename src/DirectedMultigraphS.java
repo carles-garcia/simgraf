@@ -1,14 +1,16 @@
 import java.util.HashSet;
 import java.util.Set;
 
-public class MixedGraphS<V, E extends AbstractEdge<V>>
-        extends AbstractGraphS<V,E> implements InterfaceMixedGraph<V,E> //maybe its needed a mixed interface
-{
+public class DirectedMultigraphS<V, E extends Arc<V>>
+        extends AbstractMultigraphS<V,E> implements InterfaceDirectedGraph<V,E> {
+    /*
+    The 4 following methods are exactly the same as the methods
+    in DirectedGraphS
+     */
     public int indegree(V vertex) {
         int ind = 0;
         for (E edge : edgeList.get(vertex)) {
-            if (edge.getEdgeType() == EdgeType.UNDIRECTED) ++ind;
-            else if (edge.getVertexB().equals(vertex)) ++ind;
+            if (edge.getVertexB().equals(vertex)) ++ind;
         }
         return ind;
     }
@@ -16,18 +18,15 @@ public class MixedGraphS<V, E extends AbstractEdge<V>>
     public int outdegree(V vertex) {
         int out = 0;
         for (E edge : edgeList.get(vertex)) {
-            if (edge.getEdgeType() == EdgeType.UNDIRECTED) ++out;
-            else if (edge.getVertexA().equals(vertex)) ++out;
+            if (edge.getVertexA().equals(vertex)) ++out;
         }
         return out;
     }
 
-    // todo: should undirected edges be counted?
     public Set<E> getIncomingArcs(V vertex) {
         HashSet<E> hs = new HashSet<>();
         for (E edge : edgeList.get(vertex)) {
-            if (edge.getEdgeType() == EdgeType.DIRECTED
-                    && edge.getVertexB().equals(vertex))
+            if (edge.getVertexB().equals(vertex))
                 hs.add(edge);
         }
         return hs;
@@ -35,8 +34,7 @@ public class MixedGraphS<V, E extends AbstractEdge<V>>
     public Set<E> getOutgoingArcs(V vertex) {
         HashSet<E> hs = new HashSet<>();
         for (E edge : edgeList.get(vertex)) {
-            if (edge.getEdgeType() == EdgeType.DIRECTED
-                    && edge.getVertexA().equals(vertex))
+            if (edge.getVertexA().equals(vertex))
                 hs.add(edge);
         }
         return hs;
