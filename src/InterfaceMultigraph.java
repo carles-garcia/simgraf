@@ -1,6 +1,6 @@
 import java.util.Collection;
 
-public interface InterfaceMultigraph<V, E extends Edge<V>> extends InterfaceGraph<V, E> {
+public interface InterfaceMultigraph<V, E extends AbstractEdge<V>> extends InterfaceGraph<V, E> {
 
     /**
      * Add an edge to the graph.

@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class MultigraphS<V, E extends Edge<V>>
+public abstract class MultigraphS<V, E extends AbstractEdge<V>>
         extends PseudographS<V,E> {
     /**
      * Add an edge to the graph.

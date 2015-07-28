@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class GraphS<V, E extends Edge<V>> implements InterfaceGraph<V,E> {
+public abstract class GraphS<V, E extends AbstractEdge<V>> implements InterfaceGraph<V,E> {
     /*
     Incidence list representation.
     Order of insertion of vertices is not saved
