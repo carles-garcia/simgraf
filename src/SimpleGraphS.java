@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class ListSimpleGraph<V, E extends Edge<V>> extends ListGraph<V,E> {
+public class SimpleGraphS<V, E extends Edge<V>> extends GraphS<V,E> {
     /**
      * Add an edge to the graph.
      * @param edge Must not be null. Its endpoints have to be contained in the graph,

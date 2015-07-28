@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class ListGraph<V, E extends Edge<V>> implements InterfaceGraph<V,E> {
+public class GraphS<V, E extends Edge<V>> implements InterfaceGraph<V,E> {
     /*
     Incidence list representation.
     Order of insertion of vertices is not saved
@@ -28,7 +28,7 @@ public class ListGraph<V, E extends Edge<V>> implements InterfaceGraph<V,E> {
     /**
      * Default constructor
      */
-    public ListGraph() {
+    public GraphS() {
         edgeList = new HashMap<>();
         size = 0;
     }

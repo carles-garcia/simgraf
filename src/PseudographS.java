@@ -2,8 +2,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class ListPseudograph<V, E extends Edge<V>>
-         extends ListGraph<V,E> implements InterfaceMultigraph<V,E> {
+public class PseudographS<V, E extends Edge<V>>
+         extends GraphS<V,E> implements InterfaceMultigraph<V,E> {
 
 
     /**

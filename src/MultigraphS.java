@@ -1,7 +1,7 @@
 import java.util.Objects;
 
-public class ListMultigraph<V, E extends Edge<V>>
-        extends ListPseudograph<V,E>  {
+public class MultigraphS<V, E extends Edge<V>>
+        extends PseudographS<V,E> {
     /**
      * Add an edge to the graph.
      * @param edge Must not be null. Its endpoints have to be contained in the graph
