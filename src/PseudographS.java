@@ -3,8 +3,8 @@ import java.util.Objects;
 import java.util.Set;
 
 public abstract class PseudographS<V, E extends AbstractEdge<V>>
-         extends GraphS<V,E> implements InterfaceMultigraph<V,E> {
-
+         extends AbstractGraphS<V,E> implements InterfaceMultigraph<V,E> {
+//pseudodigraph?
 
     /**
      * Add an edge to the graph.

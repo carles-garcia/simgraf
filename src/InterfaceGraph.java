@@ -52,15 +52,15 @@ public interface InterfaceGraph<V, E extends AbstractEdge<V>> {
 
     /**
      * Get all vertices in the graph
-     * @return set containing all vertices
+     * @return collection containing all vertices
      */
-    Set<V> getVertices();
+    Collection<V> getVertices();
 
     /**
      * Get all edges in the graph
-     * @return set containing all edges
+     * @return collection containing all edges
      */
-    Set<E> getEdges();
+    Collection<E> getEdges();
 
     /**
      * Get degree of a vertex (number of incident edges).
@@ -72,16 +72,16 @@ public interface InterfaceGraph<V, E extends AbstractEdge<V>> {
     /**
      * Get neighbours of a vertex (adjacent vertices)
      * @param vertex Has to be contained in the graph.
-     * @return set containing neighbours
+     * @return collection containing neighbours
      */
-    Set<V> getNeighbours(V vertex);
+    Collection<V> getNeighbours(V vertex);
 
     /**
      * Get incident edges to a vertex
      * @param vertex Has to be contained in the graph.
-     * @return set containing the edges
+     * @return collection containing the edges
      */
-    Set<E> getEdges(V vertex);
+    Collection<E> getEdges(V vertex);
 
     int order(); // number of vertices
     int size(); // number of edges
