@@ -1,6 +1,6 @@
 import java.util.Collection;
 
-public interface IntBaseGraph<V, E extends AbstractEdge<V>> {
+public interface IntBaseGraph<V, E extends Edge<V>> {
     /**
      * Add vertex to the graph
      * @param vertex Must not be null. Must not be already contained in the graph.

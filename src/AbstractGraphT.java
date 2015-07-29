@@ -1,9 +1,8 @@
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
 // possible implementation
-public abstract class AbstractGraphT<V, E extends AbstractEdge<V>> implements InterfaceGraph<V,E> {
+public abstract class AbstractGraphT<V, E extends Edge<V>> implements InterfaceGraph<V,E> {
     private HashMap<V, EdgeList> list;
 
     AbstractGraphT() {

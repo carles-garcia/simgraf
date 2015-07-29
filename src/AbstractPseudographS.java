@@ -2,7 +2,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public abstract class AbstractPseudographS<V, E extends AbstractEdge<V>>
+public abstract class AbstractPseudographS<V, E extends Edge<V>>
          extends AbstractGraphS<V,E> implements InterfaceMultigraph<V,E> {
 //pseudodigraph?
 

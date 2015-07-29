@@ -1,4 +1,4 @@
-public class WeightedArc<V> extends Arc<V> implements InterfaceWeighted {
+public class WeightedArc<V> extends Edge<V> implements InterfaceWeighted {
     private Double weight;
 
     public WeightedArc(V vertexA, V vertexB, Double weight) {

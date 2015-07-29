@@ -1,6 +1,6 @@
 import java.util.Collection;
 
-public interface InterfaceMixedGraph<V, E extends AbstractEdge<V>>
+public interface InterfaceMixedGraph<V, E extends Edge<V>>
         extends InterfaceGraph<V,E> {
     int indegree(V vertex);
     int outdegree(V vertex);

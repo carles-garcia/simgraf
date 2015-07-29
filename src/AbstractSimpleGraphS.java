@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public abstract class AbstractSimpleGraphS<V, E extends AbstractEdge<V>> extends AbstractGraphS<V,E> {
+public abstract class AbstractSimpleGraphS<V, E extends Edge<V>> extends AbstractGraphS<V,E> {
     /**
      * Add an edge to the graph.
      * @param edge Must not be null. Its endpoints have to be contained in the graph,
