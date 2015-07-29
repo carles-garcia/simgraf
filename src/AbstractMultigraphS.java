@@ -1,7 +1,7 @@
 import java.util.Objects;
 
 public abstract class AbstractMultigraphS<V, E extends AbstractEdge<V>>
-        extends PseudographS<V,E> {
+        extends AbstractPseudographS<V,E> {
     /**
      * Add an edge to the graph.
      * @param edge Must not be null. Its endpoints have to be contained in the graph

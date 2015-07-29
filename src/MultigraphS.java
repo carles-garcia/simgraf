@@ -1,5 +1,5 @@
 /**
- * Undirected graph that allows loops and multiple edges between two vertices.
+ * Undirected graph that allows multiple edges between two vertices but doesn't allow loops.
  * Implementation optimised for space.
  * @param <V> Vertices type
  * @param <E> Undirected edge, must extend {@link Edge}
