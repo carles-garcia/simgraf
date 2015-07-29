@@ -15,7 +15,7 @@ public interface InterfaceGraph<V, E extends Edge<V>> {
 
     /**
      * Add an edge to the graph.
-     * @param edge Must not be null. Its endpoints have to be contained in the graph and can't be already adjacent.
+     * @param edge Must not be null. Its endpoints have to be contained in the graph.
      */
     void add(E edge);
 
@@ -35,7 +35,7 @@ public interface InterfaceGraph<V, E extends Edge<V>> {
 
     /**
      * Returns true if two vertices are adjacent
-     * (if there is an edge between two vertices)
+     * (if there is an edge or arc between the two vertices)
      * @param vertexA Has to be contained in the graph.
      * @param vertexB Has to be contained in the graph.
      * @return True if vertexA and vertexB are adjacent.
@@ -84,4 +84,28 @@ public interface InterfaceGraph<V, E extends Edge<V>> {
 
     int order(); // number of vertices
     int size(); // number of edges
+
+    int indegree(V vertex);
+
+    int outdegree(V vertex);
+
+    Collection<E> getIncomingArcs(V vertex);
+
+    Collection<E> getOutgoingArcs(V vertex);
+
+    /**
+     * Get all edges between two vertices
+     * @param vertexA Has to be contained in the graph.
+     * @param vertexB Has to be contained in the graph.
+     * @return collection containing all edges between vertexA and vertexB
+     */
+    Collection<E> getEdges(V vertexA, V vertexB);
+
+    /**
+     * Number of edges between two vertices
+     * @param vertexA Has to be contained in the graph.
+     * @param vertexB Has to be contained in the graph.
+     * @return int number of edges between vertexA and vertexB
+     */
+    int numberOfEdges(V vertexA, V vertexB);
 }

@@ -10,9 +10,7 @@ public enum Errors {
     REMOVE_NULL_EDGE("Tried to remove a null edge"),
     NOT_ADJACENT("The vertices are not adjacent"),
     LOOPS_NOT_ALLOWED("This graph doesn't allow loops"),
-    WRONG_EDGE_TYPE("This graph doesn't allow this type of edge");
-
-
+    WRONG_EDGE_TYPE("This graph doesn't allow this type of edge")
     ;
 
     private String message;
