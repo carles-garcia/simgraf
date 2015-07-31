@@ -8,7 +8,7 @@ import java.util.Set;
  * @param <V>
  * @param <E> Edge class. Has to extend {@link Edge}
  */
-public abstract class GraphS<V, E extends Edge<V>> {
+public class GraphS<V, E extends Edge<V>> implements InterfaceGraph<V,E> {
     private HashMap<V, HashSet<E>> edgeList;
     private int size; // number of edges
     private EdgeType edgeType;
@@ -61,7 +61,7 @@ public abstract class GraphS<V, E extends Edge<V>> {
     // modified depending on subclass
     public void add(E edge) {
         Objects.requireNonNull(edge, Errors.ADD_NULL_EDGE.toString());
-        if (edgeType != null && edge.getEdgeType() != edgeType)
+        if (edgeType != null && edge.getType() != edgeType)
             throw new IllegalArgumentException(Errors.WRONG_EDGE_TYPE.toString());
 
         if (!loopsAllowed && edge.getVertexA().equals(edge.getVertexB()))
@@ -161,6 +161,7 @@ public abstract class GraphS<V, E extends Edge<V>> {
         return size;
     }
 
+    // todo: should undirected edges be counted
     public int indegree(V vertex) {
         int ind = 0;
         for (E edge : edgeList.get(vertex)) {

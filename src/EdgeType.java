@@ -1,4 +1,4 @@
 public enum EdgeType {
-    UNDIRECTED, DIRECTED
+    UNDIRECTED, DIRECTED, MIXED
 }
 

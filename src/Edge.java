@@ -7,6 +7,7 @@ public class Edge<V> {
     private EdgeType edgeType;
 
     public Edge(V vertexA, V vertexB, EdgeType edgeType) {
+        if (edgeType == EdgeType.MIXED) throw new IllegalArgumentException("An edge can't be mixed");
         this.vertexA = vertexA;
         this.vertexB = vertexB;
         this.edgeType = edgeType;
@@ -27,7 +28,7 @@ public class Edge<V> {
         return vertexB;
     }
 
-    public EdgeType getEdgeType() {
+    public EdgeType getType() {
         return edgeType;
     }
 }
