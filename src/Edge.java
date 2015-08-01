@@ -4,14 +4,11 @@ import java.util.List;
 public class Edge<V> {
     private V vertexA;
     private V vertexB;
-    private EdgeType edgeType;
 
-    public Edge(V vertexA, V vertexB, EdgeType edgeType) {
-        if (edgeType == EdgeType.MIXED) throw new IllegalArgumentException("An edge can't be mixed");
+    public Edge(V vertexA, V vertexB) {
         this.vertexA = vertexA;
         this.vertexB = vertexB;
-        this.edgeType = edgeType;
-    }
+        }
 
     public List<V> getEndpoints() {
         ArrayList<V> al = new ArrayList<>();
@@ -28,7 +25,4 @@ public class Edge<V> {
         return vertexB;
     }
 
-    public EdgeType getType() {
-        return edgeType;
-    }
 }
