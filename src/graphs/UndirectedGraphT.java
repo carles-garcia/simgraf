@@ -1,3 +1,9 @@
+package graphs;
+
+import graphs.AbstractGraphT;
+import graphs.Edge;
+import graphs.Errors;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Objects;

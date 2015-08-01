@@ -1,3 +1,5 @@
+package graphs;
+
 public class WeightedEdge<V> extends Edge<V> implements InterfaceWeighted  {
     private Double weight;
 

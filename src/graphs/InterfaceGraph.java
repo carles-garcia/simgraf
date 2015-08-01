@@ -1,3 +1,7 @@
+package graphs;
+
+import graphs.Edge;
+
 import java.util.Collection;
 
 public interface InterfaceGraph<V, E extends Edge<V>> {

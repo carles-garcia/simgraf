@@ -1,3 +1,5 @@
+package graphs;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Objects;
@@ -98,6 +100,56 @@ public class DirectedGraphT<V, E extends Edge<V>> extends AbstractGraphT<V,E> {
 
         outdegrees.get(edge.getVertexA()).getAndDecrement();
         indegrees.get(edge.getVertexB()).getAndDecrement();
+    }
+
+
+    //getEdge
+
+    public boolean areAdjacent(V vertexA, V vertexB) {
+        checkContained(vertexA);
+        checkContained(vertexB);
+        return list.get(vertexA).containsKey(vertexB);
+    }
+
+    public boolean contains(V vertex) {
+        return list.containsKey(vertex);
+    }
+
+    public int indegree(V vertex) {
+        checkContained(vertex);
+        return indegrees.get(vertex).get();
+    }
+
+    public int outdegree(V vertex) {
+        checkContained(vertex);
+        return outdegrees.get(vertex).get();
+    }
+
+    public int order() {
+        return list.size();
+    }
+
+    public int size() {
+        return size;
+    }
+
+    // arcs or edges?
+    public Set<E> getIncomingArcs(V vertex) {
+        checkContained(vertex);
+        HashSet<E> hs = new HashSet<>();
+        for (EdgeList el : list.get(vertex).values()) {
+            hs.addAll(el.incoming);
+        }
+        return hs;
+    }
+
+    public Set<E> getOutgoingArcs(V vertex) {
+        checkContained(vertex);
+        HashSet<E> hs = new HashSet<>();
+        for (EdgeList el : list.get(vertex).values()) {
+            hs.addAll(el.outgoing);
+        }
+        return hs;
     }
 
 

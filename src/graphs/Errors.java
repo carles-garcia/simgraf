@@ -1,3 +1,5 @@
+package graphs;
+
 public enum Errors {
     VERTEX_NOT_CONTAINED("The vertex is not contained in the graph"),
     VERTEX_CONTAINED("The vertex is already contained in the graph"),

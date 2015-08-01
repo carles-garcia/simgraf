@@ -1,3 +1,5 @@
+package graphs;
+
 public abstract class AbstractGraphT<V, E extends Edge<V>> {
     private boolean loopsAllowed;
     private boolean multigraph;
