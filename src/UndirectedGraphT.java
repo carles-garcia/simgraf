@@ -76,12 +76,12 @@ public class UndirectedGraphT<V, E extends Edge<V>> extends AbstractGraphT<V,E> 
 
         if (!list.get(edge.getVertexA()).get(edge.getVertexB()).remove(edge))
             throw new IllegalArgumentException(Errors.EDGE_NOT_CONTAINED.toString());
-        if (list.get(edge.getVertexA()).get(edge.getVertexB()).isEmpty())
+        // If it's empty, then vertexB is also empty.
+        if (list.get(edge.getVertexA()).get(edge.getVertexB()).isEmpty()) {
             list.get(edge.getVertexA()).remove(edge.getVertexB());
-
-        list.get(edge.getVertexB()).get(edge.getVertexA()).remove(edge);
-        if (list.get(edge.getVertexB()).get(edge.getVertexA()).isEmpty())
             list.get(edge.getVertexB()).remove(edge.getVertexA());
+        }
+        else list.get(edge.getVertexB()).get(edge.getVertexA()).remove(edge);
 
         --size;
 
