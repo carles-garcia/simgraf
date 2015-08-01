@@ -2,10 +2,28 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class UndirectedGraphT<V, E extends Edge<V>> extends AbstractGraphT<V,E> {
-    private HashMap<V, HashMap<V,HashSet<E>>> list;
+    /*
+    vertices contains the vertices as keys. The values are HashMaps that have the adjacent vertices as keys
+    and the edge lists as values.
+     */
+    private HashMap<V, VertexInfo> vertices;
+    //private HashMap<V, AtomicInteger> degrees; //atomic to update efficiently
     private int size;
+
+    private class VertexInfo {
+        private HashMap<V,HashSet<E>> list;
+        HashSet<E> loops;
+        private int degree;
+
+        VertexInfo() {
+            list = new HashMap<>();
+            if (loopsAllowed()) loops = new HashSet<>();
+            degree = 0;
+        }
+    }
 
     /*
         If the vertex isn't contained in the graph (and this is true for a null reference) throws
@@ -17,22 +35,23 @@ public class UndirectedGraphT<V, E extends Edge<V>> extends AbstractGraphT<V,E> 
 
     public UndirectedGraphT(boolean loopsAllowed, boolean multigraph) {
         super(loopsAllowed,multigraph);
-        list = new HashMap<>();
+        vertices = new HashMap<>();
         size = 0;
     }
 
     public void add(V vertex) {
         Objects.requireNonNull(vertex, Errors.ADD_NULL_VERTEX.toString());
-        if (!list.containsKey(vertex)) list.put(vertex, new HashMap<V, HashSet<E>>());
+        if (!vertices.containsKey(vertex)) vertices.put(vertex, new VertexInfo());
         else throw new IllegalArgumentException(Errors.VERTEX_CONTAINED.toString());
     }
 
     public void remove(V vertex) {
         Objects.requireNonNull(vertex, Errors.VERTEX_NOT_CONTAINED.toString());
-        for (V adjV : list.get(vertex).keySet()) {
-            list.get(adjV).remove(vertex);
+        for (V adjV : vertices.get(vertex).list.keySet()) {
+            vertices.get(adjV).degree -= vertices.get(adjV).list.get(vertex).size();
+            vertices.get(adjV).list.remove(vertex);
         }
-        list.remove(vertex);
+        vertices.remove(vertex);
     }
 
     public void add(E edge) {
@@ -43,13 +62,16 @@ public class UndirectedGraphT<V, E extends Edge<V>> extends AbstractGraphT<V,E> 
         boolean adjacent = areAdjacent(edge.getVertexA(), edge.getVertexB());
         if (isMultigraph() || !adjacent) {
             if (!adjacent) {
-                list.get(edge.getVertexA()).put(edge.getVertexB(),new HashSet<E>());
-                list.get(edge.getVertexB()).put(edge.getVertexA(),new HashSet<E>());
+                vertices.get(edge.getVertexA()).put(edge.getVertexB(),new HashSet<E>());
+                vertices.get(edge.getVertexB()).put(edge.getVertexA(),new HashSet<E>());
             }
-            if (!list.get(edge.getVertexA()).get(edge.getVertexB()).add(edge))
+            if (!vertices.get(edge.getVertexA()).get(edge.getVertexB()).add(edge))
                 throw new IllegalArgumentException(Errors.EDGE_CONTAINED.toString());
-            list.get(edge.getVertexB()).get(edge.getVertexA()).add(edge);
+            vertices.get(edge.getVertexB()).get(edge.getVertexA()).add(edge);
             ++size;
+
+            ++degrees.get(edge.getVertexA());
+            ++
         }
         else throw new IllegalArgumentException(Errors.ADD_EXISTING_EDGE.toString());
     }
@@ -60,14 +82,14 @@ public class UndirectedGraphT<V, E extends Edge<V>> extends AbstractGraphT<V,E> 
         if (!areAdjacent(edge.getVertexA(), edge.getVertexB()))
             throw new IllegalArgumentException(Errors.EDGE_NOT_CONTAINED.toString());
 
-        if (!list.get(edge.getVertexA()).get(edge.getVertexB()).remove(edge))
+        if (!vertices.get(edge.getVertexA()).get(edge.getVertexB()).remove(edge))
             throw new IllegalArgumentException(Errors.EDGE_NOT_CONTAINED.toString());
-        if (list.get(edge.getVertexA()).get(edge.getVertexB()).isEmpty())
-            list.get(edge.getVertexA()).remove(edge.getVertexB());
+        if (vertices.get(edge.getVertexA()).get(edge.getVertexB()).isEmpty())
+            vertices.get(edge.getVertexA()).remove(edge.getVertexB());
 
-        list.get(edge.getVertexB()).get(edge.getVertexA()).remove(edge);
-        if (list.get(edge.getVertexB()).get(edge.getVertexA()).isEmpty())
-            list.get(edge.getVertexB()).remove(edge.getVertexA());
+        vertices.get(edge.getVertexB()).get(edge.getVertexA()).remove(edge);
+        if (vertices.get(edge.getVertexB()).get(edge.getVertexA()).isEmpty())
+            vertices.get(edge.getVertexB()).remove(edge.getVertexA());
 
         --size;
     }
@@ -75,22 +97,22 @@ public class UndirectedGraphT<V, E extends Edge<V>> extends AbstractGraphT<V,E> 
     public E getEdge(V vertexA, V vertexB) {
         if (!areAdjacent(vertexA,vertexB))
             throw new IllegalArgumentException(Errors.NOT_ADJACENT.toString());
-        return list.get(vertexA).get(vertexB).iterator().next();
+        return vertices.get(vertexA).get(vertexB).iterator().next();
     }
 
     public boolean areAdjacent(V vertexA, V vertexB) {
         checkContained(vertexA);
         checkContained(vertexB);
-        return list.get(vertexA).containsKey(vertexB);
+        return vertices.get(vertexA).containsKey(vertexB);
     }
 
     public boolean contains(V vertex) {
-        return list.containsKey(vertex);
+        return vertices.containsKey(vertex);
     }
 
     public Set<E> getEdges() {
         HashSet<E> hs = new HashSet<>();
-        for (HashMap<V,HashSet<E>> hm : list.values()) {
+        for (HashMap<V,HashSet<E>> hm : vertices.values()) {
             for (HashSet<E> hse : hm.values()) {
                 hs.addAll(hse);
             }
@@ -102,12 +124,12 @@ public class UndirectedGraphT<V, E extends Edge<V>> extends AbstractGraphT<V,E> 
     public int degree(V vertex) {
         checkContained(vertex);
         int deg = 0;
-        for (HashSet<E> hs : list.get(vertex).values()) {
+        for (HashSet<E> hs : vertices.get(vertex).values()) {
             deg += hs.size();
         }
         // If there are loops count them twice
         HashSet<E> hs;
-        if ((hs = list.get(vertex).get(vertex)) != null) {
+        if ((hs = vertices.get(vertex).get(vertex)) != null) {
             deg += hs.size();
         }
         return deg;
@@ -115,20 +137,20 @@ public class UndirectedGraphT<V, E extends Edge<V>> extends AbstractGraphT<V,E> 
 
     public Set<V> getNeighbours(V vertex) {
         checkContained(vertex);
-        return list.get(vertex).keySet();
+        return vertices.get(vertex).keySet();
     }
 
     public Set<E> getEdges(V vertex) {
         checkContained(vertex);
         HashSet<E> hs = new HashSet<>();
-        for (HashSet<E> hse : list.get(vertex).values()) {
+        for (HashSet<E> hse : vertices.get(vertex).values()) {
             hs.addAll(hse);
         }
         return hs;
     }
 
     public int order() {
-        return list.size();
+        return vertices.size();
     }
 
     public int size() {
@@ -138,13 +160,13 @@ public class UndirectedGraphT<V, E extends Edge<V>> extends AbstractGraphT<V,E> 
     public Set<E> getEdges(V vertexA, V vertexB) {
         checkContained(vertexA);
         checkContained(vertexB);
-        return list.get(vertexA).get(vertexB);
+        return vertices.get(vertexA).get(vertexB);
     }
 
     public int numberOfEdges(V vertexA, V vertexB) {
         checkContained(vertexA);
         checkContained(vertexB);
-        return list.get(vertexA).get(vertexB).size();
+        return vertices.get(vertexA).get(vertexB).size();
     }
 
 }
