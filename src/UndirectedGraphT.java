@@ -1,19 +1,18 @@
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class UndirectedGraphT<V, E extends Edge<V>> extends AbstractGraphT<V,E> {
-    private HashMap<V, HashMap<V,EdgeList>> list;
+    private HashMap<V, HashMap<V,HashSet<E>>> list;
     private int size;
 
-    private class EdgeList {
-        HashSet<E> edges;
-        int loops;
-
-        EdgeList() {
-            edges = new HashSet<>();
-            loops = 0;
-        }
+    /*
+        If the vertex isn't contained in the graph (and this is true for a null reference) throws
+        an IllegalArgumenException
+         */
+    private void checkContained(V vertex) {
+        if (!contains(vertex)) throw new IllegalArgumentException(Errors.VERTEX_NOT_CONTAINED.toString());
     }
 
     public UndirectedGraphT(boolean loopsAllowed, boolean multigraph) {
@@ -24,7 +23,7 @@ public class UndirectedGraphT<V, E extends Edge<V>> extends AbstractGraphT<V,E> 
 
     public void add(V vertex) {
         Objects.requireNonNull(vertex, Errors.ADD_NULL_VERTEX.toString());
-        if (!list.containsKey(vertex)) list.put(vertex, new HashMap<V, EdgeList>());
+        if (!list.containsKey(vertex)) list.put(vertex, new HashMap<V, HashSet<E>>());
         else throw new IllegalArgumentException(Errors.VERTEX_CONTAINED.toString());
     }
 
@@ -38,22 +37,114 @@ public class UndirectedGraphT<V, E extends Edge<V>> extends AbstractGraphT<V,E> 
 
     public void add(E edge) {
         Objects.requireNonNull(edge, Errors.ADD_NULL_EDGE.toString());
-        boolean loop = edge.getVertexA().equals(edge.getVertexB());
-        if (!loopsAllowed() && loop)
+        if (!loopsAllowed() && edge.getVertexA().equals(edge.getVertexB()))
             throw new IllegalArgumentException(Errors.LOOPS_NOT_ALLOWED.toString());
 
         boolean adjacent = areAdjacent(edge.getVertexA(), edge.getVertexB());
         if (isMultigraph() || !adjacent) {
             if (!adjacent) {
-                list.get(edge.getVertexA()).put(edge.getVertexB(),new EdgeList());
-                list.get(edge.getVertexB()).put(edge.getVertexA(),new EdgeList());
+                list.get(edge.getVertexA()).put(edge.getVertexB(),new HashSet<E>());
+                list.get(edge.getVertexB()).put(edge.getVertexA(),new HashSet<E>());
             }
-            if (!list.get(edge.getVertexA()).get(edge.getVertexB()).edges.add(edge))
+            if (!list.get(edge.getVertexA()).get(edge.getVertexB()).add(edge))
                 throw new IllegalArgumentException(Errors.EDGE_CONTAINED.toString());
-            list.get(edge.getVertexB()).get(edge.getVertexA()).edges.add(edge);
-            if (loop) ++list.get(edge.getVertexA()).get(edge.getVertexB()).loops;
+            list.get(edge.getVertexB()).get(edge.getVertexA()).add(edge);
             ++size;
         }
         else throw new IllegalArgumentException(Errors.ADD_EXISTING_EDGE.toString());
     }
+
+    public void remove(E edge) {
+        // must update adjacencies
+        Objects.requireNonNull(edge, Errors.REMOVE_NULL_EDGE.toString());
+        if (!areAdjacent(edge.getVertexA(), edge.getVertexB()))
+            throw new IllegalArgumentException(Errors.EDGE_NOT_CONTAINED.toString());
+
+        if (!list.get(edge.getVertexA()).get(edge.getVertexB()).remove(edge))
+            throw new IllegalArgumentException(Errors.EDGE_NOT_CONTAINED.toString());
+        if (list.get(edge.getVertexA()).get(edge.getVertexB()).isEmpty())
+            list.get(edge.getVertexA()).remove(edge.getVertexB());
+
+        list.get(edge.getVertexB()).get(edge.getVertexA()).remove(edge);
+        if (list.get(edge.getVertexB()).get(edge.getVertexA()).isEmpty())
+            list.get(edge.getVertexB()).remove(edge.getVertexA());
+
+        --size;
+    }
+
+    public E getEdge(V vertexA, V vertexB) {
+        if (!areAdjacent(vertexA,vertexB))
+            throw new IllegalArgumentException(Errors.NOT_ADJACENT.toString());
+        return list.get(vertexA).get(vertexB).iterator().next();
+    }
+
+    public boolean areAdjacent(V vertexA, V vertexB) {
+        checkContained(vertexA);
+        checkContained(vertexB);
+        return list.get(vertexA).containsKey(vertexB);
+    }
+
+    public boolean contains(V vertex) {
+        return list.containsKey(vertex);
+    }
+
+    public Set<E> getEdges() {
+        HashSet<E> hs = new HashSet<>();
+        for (HashMap<V,HashSet<E>> hm : list.values()) {
+            for (HashSet<E> hse : hm.values()) {
+                hs.addAll(hse);
+            }
+        }
+        return hs;
+    }
+
+    // could maintain a variable instead of calculating
+    public int degree(V vertex) {
+        checkContained(vertex);
+        int deg = 0;
+        for (HashSet<E> hs : list.get(vertex).values()) {
+            deg += hs.size();
+        }
+        // If there are loops count them twice
+        HashSet<E> hs;
+        if ((hs = list.get(vertex).get(vertex)) != null) {
+            deg += hs.size();
+        }
+        return deg;
+    }
+
+    public Set<V> getNeighbours(V vertex) {
+        checkContained(vertex);
+        return list.get(vertex).keySet();
+    }
+
+    public Set<E> getEdges(V vertex) {
+        checkContained(vertex);
+        HashSet<E> hs = new HashSet<>();
+        for (HashSet<E> hse : list.get(vertex).values()) {
+            hs.addAll(hse);
+        }
+        return hs;
+    }
+
+    public int order() {
+        return list.size();
+    }
+
+    public int size() {
+        return size;
+    }
+
+    public Set<E> getEdges(V vertexA, V vertexB) {
+        checkContained(vertexA);
+        checkContained(vertexB);
+        return list.get(vertexA).get(vertexB);
+    }
+
+    public int numberOfEdges(V vertexA, V vertexB) {
+        checkContained(vertexA);
+        checkContained(vertexB);
+        return list.get(vertexA).get(vertexB).size();
+    }
+
 }
