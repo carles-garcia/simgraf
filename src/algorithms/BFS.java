@@ -1,9 +1,7 @@
 package algorithms;//Created on 01/08/15.
 
-import graphs.AbstractGraphT;
-import graphs.Edge;
-import graphs.UndirectedGraphT;
+import graphs.UndirectedGraph;
 
-public class BFS<G extends UndirectedGraphT> {
+public class BFS<G extends UndirectedGraph> {
 
 }

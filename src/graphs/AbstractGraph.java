@@ -2,7 +2,7 @@ package graphs;
 
 import java.util.Collection;
 
-public abstract class AbstractGraphT<V, E extends Edge<V>> {
+public abstract class AbstractGraph<V, E extends Edge<V>> {
     private boolean loopsAllowed;
     private boolean multigraph;
 
@@ -11,7 +11,7 @@ public abstract class AbstractGraphT<V, E extends Edge<V>> {
      * @param loopsAllowed True if loops are allowed
      * @param multigraph True if multiple edges between two vertices are allowed
      */
-    public AbstractGraphT(boolean loopsAllowed, boolean multigraph) {
+    public AbstractGraph(boolean loopsAllowed, boolean multigraph) {
         this.loopsAllowed = loopsAllowed;
         this.multigraph = multigraph;
     }
@@ -94,7 +94,7 @@ public abstract class AbstractGraphT<V, E extends Edge<V>> {
 
     /**
      * Get neighbours of a vertex
-     * A neighbour of a vertex is another vertex that can be reached from it through an edge.
+     * A neighbour of a vertex is another vertex that can be reached from the first through an edge.
      * @param vertex to get neighbours of
      * @return collection containing neighbours of the vertex
      */

@@ -6,7 +6,11 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class DirectedGraphT<V, E extends Edge<V>> extends AbstractGraphT<V,E> {
+public class DirectedGraph<V, E extends Edge<V>> extends AbstractGraph<V,E> {
+    /*
+    list contains the vertices as keys. The values are HashMaps that have the adjacent vertices as keys
+    and EdgeLists associated. Each EdgeList contains the edges between two vertices.
+     */
     private HashMap<V, HashMap<V,EdgeList>> list;
     private HashMap<V, AtomicInteger> indegrees; //atomic to update efficiently
     private HashMap<V, AtomicInteger> outdegrees;
@@ -29,13 +33,22 @@ public class DirectedGraphT<V, E extends Edge<V>> extends AbstractGraphT<V,E> {
         if (!contains(vertex)) throw new IllegalArgumentException(Errors.VERTEX_NOT_CONTAINED.toString());
     }
 
-    public DirectedGraphT(boolean loopsAllowed, boolean multigraph) {
+    /* PUBLIC METHODS */
+
+    /**
+     * Constructor for the directed graph.
+     * @param loopsAllowed True if loops are allowed
+     * @param multigraph True if multiple edges between two vertices are allowed
+     */
+    public DirectedGraph(boolean loopsAllowed, boolean multigraph) {
         super(loopsAllowed,multigraph);
         list = new HashMap<>();
         indegrees = new HashMap<>();
         outdegrees = new HashMap<>();
         size = 0;
     }
+
+    /* Overrides */
 
     public void add(V vertex) {
         Objects.requireNonNull(vertex, Errors.ADD_NULL_VERTEX.toString());
@@ -134,44 +147,6 @@ public class DirectedGraphT<V, E extends Edge<V>> extends AbstractGraphT<V,E> {
         return hs;
     }
 
-    public int indegree(V vertex) {
-        checkContained(vertex);
-        return indegrees.get(vertex).get();
-    }
-
-    public int outdegree(V vertex) {
-        checkContained(vertex);
-        return outdegrees.get(vertex).get();
-    }
-
-    public int order() {
-        return list.size();
-    }
-
-    public int size() {
-        return size;
-    }
-
-    // arcs or edges?
-    public Set<E> getIncomingArcs(V vertex) {
-        checkContained(vertex);
-        HashSet<E> hs = new HashSet<>();
-        for (EdgeList el : list.get(vertex).values()) {
-            hs.addAll(el.incoming);
-        }
-        return hs;
-    }
-
-    public Set<E> getOutgoingArcs(V vertex) {
-        checkContained(vertex);
-        HashSet<E> hs = new HashSet<>();
-        for (EdgeList el : list.get(vertex).values()) {
-            hs.addAll(el.outgoing);
-        }
-        return hs;
-    }
-
-    // reachable
     public Set<V> getNeighbours(V vertex) {
         checkContained(vertex);
         HashSet<V> hs = new HashSet<>();
@@ -182,5 +157,62 @@ public class DirectedGraphT<V, E extends Edge<V>> extends AbstractGraphT<V,E> {
         return hs;
     }
 
+    public int order() {
+        return list.size();
+    }
+
+    public int size() {
+        return size;
+    }
+
+    /* Original methods */
+
+    /**
+     * Returns the indegree of a vertex (number of incoming edges)
+     * @param vertex to get indegree of
+     * @return integer indicating indegree of the vertex
+     */
+    public int indegree(V vertex) {
+        checkContained(vertex);
+        return indegrees.get(vertex).get();
+    }
+
+    /**
+     * Returns the outdegree of a vertex (number of ougoing edges)
+     * @param vertex to get outdegree of
+     * @return integer indicating outdegree of the vertex
+     */
+    public int outdegree(V vertex) {
+        checkContained(vertex);
+        return outdegrees.get(vertex).get();
+    }
+
+    /**
+     * Get incoming edges of the vertex
+     * @param vertex to get incoming edges
+     * @return set containing incoming edges to the vertex
+     */
+    public Set<E> getIncomingEdges(V vertex) {
+        checkContained(vertex);
+        HashSet<E> hs = new HashSet<>();
+        for (EdgeList el : list.get(vertex).values()) {
+            hs.addAll(el.incoming);
+        }
+        return hs;
+    }
+
+    /**
+     * Get outgoing edges of the vertex
+     * @param vertex to get outgoing edges
+     * @return set containing outgoing edges from the vertex
+     */
+    public Set<E> getOutgoingEdges(V vertex) {
+        checkContained(vertex);
+        HashSet<E> hs = new HashSet<>();
+        for (EdgeList el : list.get(vertex).values()) {
+            hs.addAll(el.outgoing);
+        }
+        return hs;
+    }
 
 }

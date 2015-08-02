@@ -6,10 +6,10 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class UndirectedGraphT<V, E extends Edge<V>> extends AbstractGraphT<V,E> {
+public class UndirectedGraph<V, E extends Edge<V>> extends AbstractGraph<V,E> {
     /*
     list contains the vertices as keys. The values are HashMaps that have the adjacent vertices as keys
-    and the edge lists as values.
+    and the sets of edges between them as values.
      */
     private HashMap<V, HashMap<V,HashSet<E>>> list;
     private HashMap<V, AtomicInteger> degrees; //atomic to update efficiently
@@ -24,7 +24,12 @@ public class UndirectedGraphT<V, E extends Edge<V>> extends AbstractGraphT<V,E> 
 
     /* PUBLIC METHODS */
 
-    public UndirectedGraphT(boolean loopsAllowed, boolean multigraph) {
+    /**
+     * Constructor for the undirected graph.
+     * @param loopsAllowed True if loops are allowed
+     * @param multigraph True if multiple edges between two vertices are allowed
+     */
+    public UndirectedGraph(boolean loopsAllowed, boolean multigraph) {
         super(loopsAllowed,multigraph);
         list = new HashMap<>();
         degrees = new HashMap<>();
@@ -143,7 +148,7 @@ public class UndirectedGraphT<V, E extends Edge<V>> extends AbstractGraphT<V,E> 
 
     /**
      * Returns the degree of a vertex
-     * (number of incident edges)
+     * (number of incident edges. Loops count as two)
      * @param vertex to get degree of
      * @return integer indicating the degree
      */
