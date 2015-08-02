@@ -1,10 +1,10 @@
 package graphs;
 
-public class WeightedEdge<V> extends Edge<V> implements InterfaceWeighted  {
+public class WeightedEdge<V> extends Edge<V>  {
     private Double weight;
 
-    public WeightedEdge(V vertexA, V vertexB, EdgeType edgeType, Double weight) {
-        super(vertexA,vertexB,edgeType);
+    public WeightedEdge(V vertexA, V vertexB, Double weight) {
+        super(vertexA,vertexB);
         this.weight = weight;
     }
 

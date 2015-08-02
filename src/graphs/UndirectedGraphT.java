@@ -1,9 +1,5 @@
 package graphs;
 
-import graphs.AbstractGraphT;
-import graphs.Edge;
-import graphs.Errors;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Objects;
@@ -19,13 +15,14 @@ public class UndirectedGraphT<V, E extends Edge<V>> extends AbstractGraphT<V,E> 
     private HashMap<V, AtomicInteger> degrees; //atomic to update efficiently
     private int size;
 
-    /*
-        If the vertex isn't contained in the graph (and this is true for a null reference) throws
-        an IllegalArgumenException
-         */
+    /* If the vertex isn't contained in the graph (and this is true for a null reference) throws
+    an IllegalArgumentException
+     */
     private void checkContained(V vertex) {
         if (!contains(vertex)) throw new IllegalArgumentException(Errors.VERTEX_NOT_CONTAINED.toString());
     }
+
+    /* PUBLIC METHODS */
 
     public UndirectedGraphT(boolean loopsAllowed, boolean multigraph) {
         super(loopsAllowed,multigraph);
@@ -33,6 +30,8 @@ public class UndirectedGraphT<V, E extends Edge<V>> extends AbstractGraphT<V,E> 
         degrees = new HashMap<>();
         size = 0;
     }
+
+    /* Overrides */
 
     public void add(V vertex) {
         Objects.requireNonNull(vertex, Errors.ADD_NULL_VERTEX.toString());
@@ -111,6 +110,10 @@ public class UndirectedGraphT<V, E extends Edge<V>> extends AbstractGraphT<V,E> 
         return list.containsKey(vertex);
     }
 
+    public Set<V> getVertices() {
+        return list.keySet();
+    }
+
     public Set<E> getEdges() {
         HashSet<E> hs = new HashSet<>();
         for (HashMap<V,HashSet<E>> hm : list.values()) {
@@ -121,25 +124,11 @@ public class UndirectedGraphT<V, E extends Edge<V>> extends AbstractGraphT<V,E> 
         return hs;
     }
 
-    // could maintain a variable instead of calculating
-    public int degree(V vertex) {
-        checkContained(vertex);
-        return degrees.get(vertex).get();
-    }
-
     public Set<V> getNeighbours(V vertex) {
         checkContained(vertex);
         return list.get(vertex).keySet();
     }
 
-    public Set<E> getEdges(V vertex) {
-        checkContained(vertex);
-        HashSet<E> hs = new HashSet<>();
-        for (HashSet<E> hse : list.get(vertex).values()) {
-            hs.addAll(hse);
-        }
-        return hs;
-    }
 
     public int order() {
         return list.size();
@@ -149,12 +138,52 @@ public class UndirectedGraphT<V, E extends Edge<V>> extends AbstractGraphT<V,E> 
         return size;
     }
 
+
+    /* Original methods */
+
+    /**
+     * Returns the degree of a vertex
+     * (number of incident edges)
+     * @param vertex to get degree of
+     * @return integer indicating the degree
+     */
+    public int degree(V vertex) {
+        checkContained(vertex);
+        return degrees.get(vertex).get();
+    }
+
+    /**
+     * Get all incident edges to the vertex
+     * @param vertex to get incident edges
+     * @return set containing all incident edges to the vertex
+     */
+    public Set<E> getEdges(V vertex) {
+        checkContained(vertex);
+        HashSet<E> hs = new HashSet<>();
+        for (HashSet<E> hse : list.get(vertex).values()) {
+            hs.addAll(hse);
+        }
+        return hs;
+    }
+
+    /**
+     * Get all edges between two vertices
+     * @param vertexA first vertex
+     * @param vertexB second vertex
+     * @return set containing all edges between vertexA and vertexB
+     */
     public Set<E> getEdges(V vertexA, V vertexB) {
         checkContained(vertexA);
         checkContained(vertexB);
         return list.get(vertexA).get(vertexB);
     }
 
+    /**
+     * Number of edges between two vertices
+     * @param vertexA first vertex
+     * @param vertexB second vertex
+     * @return integer indicating number of edges between vertexA and vertexB
+     */
     public int numberOfEdges(V vertexA, V vertexB) {
         checkContained(vertexA);
         checkContained(vertexB);

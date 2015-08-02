@@ -5,7 +5,5 @@ import graphs.Edge;
 import graphs.UndirectedGraphT;
 
 public class BFS<G extends UndirectedGraphT> {
-    BFS() {
 
-    }
 }

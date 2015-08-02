@@ -9,9 +9,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class DirectedGraphT<V, E extends Edge<V>> extends AbstractGraphT<V,E> {
     private HashMap<V, HashMap<V,EdgeList>> list;
     private HashMap<V, AtomicInteger> indegrees; //atomic to update efficiently
-    private HashMap<V, AtomicInteger> outdegrees; //atomic to update efficiently
+    private HashMap<V, AtomicInteger> outdegrees;
     private int size; // number of edges
-
 
     private class EdgeList {
         HashSet<E> incoming;
@@ -23,10 +22,9 @@ public class DirectedGraphT<V, E extends Edge<V>> extends AbstractGraphT<V,E> {
         }
     }
 
-    /*
-        If the vertex isn't contained in the graph (and this is true for a null reference) throws
-        an IllegalArgumenException
-         */
+    /* If the vertex isn't contained in the graph (and this is true for a null reference) throws
+    an IllegalArgumenException
+     */
     private void checkContained(V vertex) {
         if (!contains(vertex)) throw new IllegalArgumentException(Errors.VERTEX_NOT_CONTAINED.toString());
     }
@@ -103,7 +101,13 @@ public class DirectedGraphT<V, E extends Edge<V>> extends AbstractGraphT<V,E> {
     }
 
 
-    //getEdge
+    public E getEdge(V vertexA, V vertexB) {
+        if (!areAdjacent(vertexA,vertexB))
+            throw new IllegalArgumentException(Errors.NOT_ADJACENT.toString());
+        E edge = list.get(vertexA).get(vertexB).incoming.iterator().next();
+        if (edge == null) edge = list.get(vertexA).get(vertexB).outgoing.iterator().next();
+        return edge;
+    }
 
     public boolean areAdjacent(V vertexA, V vertexB) {
         checkContained(vertexA);
@@ -113,6 +117,21 @@ public class DirectedGraphT<V, E extends Edge<V>> extends AbstractGraphT<V,E> {
 
     public boolean contains(V vertex) {
         return list.containsKey(vertex);
+    }
+
+    public Set<V> getVertices() {
+        return list.keySet();
+    }
+
+    public Set<E> getEdges() {
+        HashSet<E> hs = new HashSet<>();
+        for (HashMap<V,EdgeList> hm : list.values()) {
+            for (EdgeList el : hm.values()) {
+                hs.addAll(el.incoming);
+                hs.addAll(el.outgoing);
+            }
+        }
+        return hs;
     }
 
     public int indegree(V vertex) {
@@ -148,6 +167,17 @@ public class DirectedGraphT<V, E extends Edge<V>> extends AbstractGraphT<V,E> {
         HashSet<E> hs = new HashSet<>();
         for (EdgeList el : list.get(vertex).values()) {
             hs.addAll(el.outgoing);
+        }
+        return hs;
+    }
+
+    // reachable
+    public Set<V> getNeighbours(V vertex) {
+        checkContained(vertex);
+        HashSet<V> hs = new HashSet<>();
+        for (V adjV : list.get(vertex).keySet()) {
+            if (!list.get(vertex).get(adjV).outgoing.isEmpty())
+                hs.add(adjV);
         }
         return hs;
     }
