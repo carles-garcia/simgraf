@@ -1,4 +1,5 @@
 # simgraf
 A simple graph library written in Java
 
-CURRENTLY AT AN EARLY STAGE OF DEVELOPMENT
+#CURRENTLY IN ALPHA
+Graphs are finished but haven't been tested thoroughly
