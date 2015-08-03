@@ -4,12 +4,14 @@ import graphs.AbstractGraph;
 import graphs.Edge;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class BreadthFirstSearch<V, E extends Edge<V>, G extends AbstractGraph<V,E>> {
-    private HashMap<V, Boolean> visited;
-    private HashMap<V, Integer> distances;
+    private HashSet<V> visited; //linkedHashSet would mantain order
+    private HashMap<V, AtomicInteger> distances;  // atomic to update efficiently
     private HashMap<V, V> predecessors;
 
     private final int INFINITY = -1;
@@ -21,9 +23,9 @@ public class BreadthFirstSearch<V, E extends Edge<V>, G extends AbstractGraph<V,
         while (!q.isEmpty()) {
             V v = q.remove();
             for (V adjV : graph.getNeighbours(v)) {
-                if (!visited.get(adjV)) {
-                    visited.put(v, true);
-                    distances.put(adjV,distances.get(v) + 1);
+                if (!visited.contains(adjV)) {
+                    visited.add(adjV);
+                    distances.get(adjV).set(distances.get(v).get() + 1);
                     predecessors.put(adjV, v);
                     q.add(adjV);
                 }
@@ -38,9 +40,9 @@ public class BreadthFirstSearch<V, E extends Edge<V>, G extends AbstractGraph<V,
         while (!q.isEmpty()) {
             V v = q.remove();
             for (V adjV : graph.getNeighbours(v)) {
-                if (!visited.get(adjV)) {
-                    visited.put(v, true);
-                    distances.put(adjV, distances.get(v) + 1);
+                if (!visited.contains(adjV)) {
+                    visited.add(adjV);
+                    distances.get(adjV).set(distances.get(v).get() + 1);
                     predecessors.put(adjV, v);
                     if (adjV == to_find) return;
                     q.add(adjV);
@@ -50,22 +52,21 @@ public class BreadthFirstSearch<V, E extends Edge<V>, G extends AbstractGraph<V,
     }
 
     private void initialise(G graph, V search_key, Queue<V> q) {
-        visited = new HashMap<>();
+        visited = new HashSet<>();
         distances = new HashMap<>();
         predecessors = new HashMap<>();
 
         for (V vertex : graph.getVertices()) {
-            visited.put(vertex,false);
-            distances.put(vertex,INFINITY);
+            distances.put(vertex, new AtomicInteger(INFINITY));
             predecessors.put(vertex,null);
         }
 
-        distances.put(search_key, 0);
-        visited.put(search_key, true);
+        distances.get(search_key).set(0);
+        visited.add(search_key);
         q.add(search_key);
     }
 
-    private HashMap<V, Integer> getDistances() {
+    private HashMap<V, AtomicInteger> getDistances() {
         return distances;
     }
 
@@ -73,6 +74,8 @@ public class BreadthFirstSearch<V, E extends Edge<V>, G extends AbstractGraph<V,
         return predecessors;
     }
 
-
+    private HashSet<V> getVisited() {
+        return visited;
+    }
 
 }
