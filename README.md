@@ -2,7 +2,7 @@
 A simple graph library written in Java.
 Easily extensible.
 
-(*)Graphs and algorithms are finished but haven't been tested thoroughly
+\* Graphs and algorithms are finished but haven't been tested thoroughly
 
 ## Structure
 This library contains 2 principal packages:
