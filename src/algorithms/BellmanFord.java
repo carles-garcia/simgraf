@@ -6,6 +6,11 @@ import graphs.WeightedEdge;
 
 import java.util.HashMap;
 
+/**
+ * Bellman-Ford algorithm
+ * @param <V> type of the vertices of the graph
+ * @param <E> type of the edges of the graph. Have to extend {@link WeightedEdge}
+ */
 public class BellmanFord<V, E extends WeightedEdge<V>> {
     private HashMap<V, Double> distances;
     private HashMap<V, V> predecessors;
@@ -13,6 +18,11 @@ public class BellmanFord<V, E extends WeightedEdge<V>> {
     private boolean negativeCycle;
 
 
+    /**
+     * Execute the Bellman-Ford algorithm starting from the source vertex.
+     * @param graph
+     * @param source
+     */
     public BellmanFord(DirectedGraph<V,E> graph, V source) {
         distances = new HashMap<>();
         predecessors = new HashMap<>();

@@ -8,12 +8,23 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.PriorityQueue;
 
+/**
+ * Dijkstra algorithm
+ * @param <V> type of the vertices of the graph
+ * @param <E> type of the edges of the graph. Have to extend {@link WeightedEdge}
+ */
 public class Dijkstra<V, E extends WeightedEdge<V>> {
     private HashMap<V, Double> distances;
     private HashMap<V, V> predecessors;
     private HashSet<V> visited;
     private final Double INFINITY = Double.POSITIVE_INFINITY;
     //todo: graph iterators?
+
+    /**
+     * Execute algorithm starting from source vertex
+     * @param graph
+     * @param source
+     */
     public Dijkstra(DirectedGraph<V,E> graph, V source) {
         distances = new HashMap<>();
         predecessors = new HashMap<>();
