@@ -9,14 +9,14 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class BreadthFirstSearch<V, E extends Edge<V>, G extends AbstractGraph<V,E>> {
+public class BFS<V> {
     private HashSet<V> visited; //linkedHashSet would mantain order
     private HashMap<V, AtomicInteger> distances;  // atomic to update efficiently
     private HashMap<V, V> predecessors;
 
     private final int INFINITY = -1;
 
-    public BreadthFirstSearch(G graph, V search_key) {
+    public BFS(AbstractGraph<V,?> graph, V search_key) {
         Queue<V> q = new LinkedList<>();
         initialise(graph, search_key, q);
 
@@ -33,7 +33,7 @@ public class BreadthFirstSearch<V, E extends Edge<V>, G extends AbstractGraph<V,
         }
     }
 
-    public BreadthFirstSearch(G graph, V search_key, V to_find) {
+    public BFS(AbstractGraph<V,?> graph, V search_key, V to_find) {
         Queue<V> q = new LinkedList<>();
         initialise(graph, search_key, q);
 
@@ -51,7 +51,7 @@ public class BreadthFirstSearch<V, E extends Edge<V>, G extends AbstractGraph<V,
         }
     }
 
-    private void initialise(G graph, V search_key, Queue<V> q) {
+    private void initialise(AbstractGraph<V,?> graph, V search_key, Queue<V> q) {
         visited = new HashSet<>();
         distances = new HashMap<>();
         predecessors = new HashMap<>();
@@ -66,15 +66,15 @@ public class BreadthFirstSearch<V, E extends Edge<V>, G extends AbstractGraph<V,
         q.add(search_key);
     }
 
-    private HashMap<V, AtomicInteger> getDistances() {
+    public HashMap<V, AtomicInteger> getDistances() {
         return distances;
     }
 
-    private HashMap<V, V> getPredecessors() {
+    public HashMap<V, V> getPredecessors() {
         return predecessors;
     }
 
-    private HashSet<V> getVisited() {
+    public HashSet<V> getVisited() {
         return visited;
     }
 

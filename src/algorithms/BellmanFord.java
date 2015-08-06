@@ -6,14 +6,14 @@ import graphs.WeightedEdge;
 
 import java.util.HashMap;
 
-public class BellmanFord<V, E extends WeightedEdge<V>, G extends DirectedGraph<V,E>> {
+public class BellmanFord<V, E extends WeightedEdge<V>> {
     private HashMap<V, Double> distances;
     private HashMap<V, V> predecessors;
     private final Double INFINITY = Double.POSITIVE_INFINITY;
     private boolean negativeCycle;
 
 
-    public BellmanFord(G graph, V source) {
+    public BellmanFord(DirectedGraph<V,E> graph, V source) {
         distances = new HashMap<>();
         predecessors = new HashMap<>();
         negativeCycle = false;

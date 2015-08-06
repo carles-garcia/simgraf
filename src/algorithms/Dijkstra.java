@@ -8,13 +8,13 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.PriorityQueue;
 
-public class Dijkstra<V, E extends WeightedEdge<V>, G extends DirectedGraph<V,E>> {
+public class Dijkstra<V, E extends WeightedEdge<V>> {
     private HashMap<V, Double> distances;
     private HashMap<V, V> predecessors;
     private HashSet<V> visited;
     private final Double INFINITY = Double.POSITIVE_INFINITY;
     //todo: graph iterators?
-    public Dijkstra(G graph, V source) {
+    public Dijkstra(DirectedGraph<V,E> graph, V source) {
         distances = new HashMap<>();
         predecessors = new HashMap<>();
         visited = new HashSet<>();
