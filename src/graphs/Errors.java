@@ -1,5 +1,9 @@
 package graphs;
 
+/**
+ * Errors class.
+ * For use in exceptions in the graphs' code.
+ */
 public enum Errors {
     VERTEX_NOT_CONTAINED("The vertex is not contained in the graph"),
     VERTEX_CONTAINED("The vertex is already contained in the graph"),
