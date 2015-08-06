@@ -1,6 +1,7 @@
 package test;
 
 import algorithms.BFS;
+import graphs.DirectedGraph;
 import graphs.Edge;
 import graphs.UndirectedGraph;
 
@@ -22,6 +23,12 @@ public class BFSTest {
             System.out.print("Distance to " + i + ": ");
             System.out.println(bfs.getDistances().get(i));
         }
+
+
+            DirectedGraph<Double, Edge<Double>> dg = new DirectedGraph<>(false, false);
+            BFS<Double> bfs2 = new BFS<Double>(dg, .0);
+
+
 
 
     }
