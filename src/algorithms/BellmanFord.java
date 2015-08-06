@@ -6,14 +6,14 @@ import graphs.WeightedEdge;
 
 import java.util.HashMap;
 
-public class Bellman_Ford<V, E extends WeightedEdge<V>, G extends DirectedGraph<V,E>> {
+public class BellmanFord<V, E extends WeightedEdge<V>, G extends DirectedGraph<V,E>> {
     private HashMap<V, Double> distances;
     private HashMap<V, V> predecessors;
     private final Double INFINITY = Double.POSITIVE_INFINITY;
     private boolean negativeCycle;
 
 
-    public Bellman_Ford(G graph, V source) {
+    public BellmanFord(G graph, V source) {
         distances = new HashMap<>();
         predecessors = new HashMap<>();
         negativeCycle = false;
@@ -21,16 +21,20 @@ public class Bellman_Ford<V, E extends WeightedEdge<V>, G extends DirectedGraph<
             distances.put(vertex, INFINITY);
             predecessors.put(vertex,null);
         }
-        distances.put(source, INFINITY);
+        distances.put(source, 0.0);
 
+        // my optimisation would consist in starting with source's edges
         for (int i = 0; i < graph.order()-1; ++i) {
+            boolean change = false;
             for (E edge : graph.getEdges()) {
                 Double newD = distances.get(edge.getVertexA()) + edge.getWeight();
                 if (newD < distances.get(edge.getVertexB())) {
                     distances.put(edge.getVertexB(), newD);
                     predecessors.put(edge.getVertexB(), edge.getVertexA());
+                    change = true;
                 }
             }
+            if (!change) break; //optimisation
         }
 
         //check for negative cycles
