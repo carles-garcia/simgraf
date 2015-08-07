@@ -19,3 +19,5 @@ jgrapht-master/
 *.orig
 
 out
+
+test

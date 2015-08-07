@@ -1,9 +1,7 @@
-package algorithms;//Created on 03/08/15.
+package algorithms;
 
-import graphs.AbstractGraph;
 import graphs.DirectedGraph;
 import graphs.WeightedEdge;
-
 import java.util.HashMap;
 
 /**
@@ -16,7 +14,6 @@ public class BellmanFord<V, E extends WeightedEdge<V>> {
     private HashMap<V, V> predecessors;
     private final Double INFINITY = Double.POSITIVE_INFINITY;
     private boolean negativeCycle;
-
 
     /**
      * Execute the Bellman-Ford algorithm starting from the source vertex.
@@ -33,7 +30,7 @@ public class BellmanFord<V, E extends WeightedEdge<V>> {
         }
         distances.put(source, 0.0);
 
-        // my optimisation would consist in starting with source's edges
+        // possible optimisation? starting with source's edges
         for (int i = 0; i < graph.order()-1; ++i) {
             boolean change = false;
             for (E edge : graph.getEdges()) {
@@ -66,6 +63,10 @@ public class BellmanFord<V, E extends WeightedEdge<V>> {
         return predecessors;
     }
 
+    /**
+     * Returns if the graph has a negative weight cycle
+     * @return true if the graph has a negative weight cycle
+     */
     public boolean hasNegativeCycle() {
         return negativeCycle;
     }
