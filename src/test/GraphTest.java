@@ -221,17 +221,15 @@ public class GraphTest {
         digraph2L.add(new Edge<Integer>(1,1));
         digraph2LM.add(new Edge<Integer>(1,1));
 
-        graph2L.add(new Edge<Integer>(1,1));
-        graph2LM.add(new Edge<Integer>(1,1));
-        digraph2L.add(new Edge<Integer>(1,1));
-        digraph2LM.add(new Edge<Integer>(1,1));
-        
         
         //multis
         graph2M.add(new Edge<Integer>(4,3));
         graph2LM.add(new Edge<Integer>(4,3));
         digraph2M.add(new Edge<Integer>(4,3));
         digraph2LM.add(new Edge<Integer>(4,3));
+
+        graph2LM.add(new Edge<Integer>(1,1));
+        digraph2LM.add(new Edge<Integer>(1,1));
 
         graph2M.add(new Edge<Integer>(6,7));
         graph2LM.add(new Edge<Integer>(6,7));
