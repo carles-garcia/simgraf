@@ -12,7 +12,6 @@ import static org.junit.Assert.*;
 
 public class BellmanFordTest extends GraphTest {
     BellmanFord<Integer, WeightedEdge<Integer>> bf;
-    private static final double DELTA = 1e-15;
 
     @Before
     public void setUp() throws Exception {

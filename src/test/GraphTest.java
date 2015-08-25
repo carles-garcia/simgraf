@@ -6,6 +6,9 @@ import graphs.UndirectedGraph;
 import graphs.WeightedEdge;
 
 public class GraphTest {
+    static final double DELTA = 1e-15;
+
+
     DirectedGraph<Integer, WeightedEdge<Integer>> digraph1 = new DirectedGraph<>(false,false);
     DirectedGraph<Integer, WeightedEdge<Integer>> digraph2 = new DirectedGraph<>(false,false);
 
