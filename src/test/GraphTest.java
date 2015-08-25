@@ -3,19 +3,20 @@ package test;
 import graphs.DirectedGraph;
 import graphs.Edge;
 import graphs.UndirectedGraph;
+import graphs.WeightedEdge;
 
 public class GraphTest {
-    DirectedGraph<Integer, Edge<Integer>> digraph1 = new DirectedGraph<>(false,false);
-    DirectedGraph<Integer, Edge<Integer>> digraph2 = new DirectedGraph<>(false,false);
+    DirectedGraph<Integer, WeightedEdge<Integer>> digraph1 = new DirectedGraph<>(false,false);
+    DirectedGraph<Integer, WeightedEdge<Integer>> digraph2 = new DirectedGraph<>(false,false);
 
-    DirectedGraph<Integer, Edge<Integer>> digraph1L = new DirectedGraph<>(true,false);
-    DirectedGraph<Integer, Edge<Integer>> digraph2L = new DirectedGraph<>(true,false);
+    DirectedGraph<Integer, WeightedEdge<Integer>> digraph1L = new DirectedGraph<>(true,false);
+    DirectedGraph<Integer, WeightedEdge<Integer>> digraph2L = new DirectedGraph<>(true,false);
 
-    DirectedGraph<Integer, Edge<Integer>> digraph1M = new DirectedGraph<>(false,true);
-    DirectedGraph<Integer, Edge<Integer>> digraph2M = new DirectedGraph<>(false,true);
+    DirectedGraph<Integer, WeightedEdge<Integer>> digraph1M = new DirectedGraph<>(false,true);
+    DirectedGraph<Integer, WeightedEdge<Integer>> digraph2M = new DirectedGraph<>(false,true);
 
-    DirectedGraph<Integer, Edge<Integer>> digraph1LM = new DirectedGraph<>(true,true);
-    DirectedGraph<Integer, Edge<Integer>> digraph2LM = new DirectedGraph<>(true,true);
+    DirectedGraph<Integer, WeightedEdge<Integer>> digraph1LM = new DirectedGraph<>(true,true);
+    DirectedGraph<Integer, WeightedEdge<Integer>> digraph2LM = new DirectedGraph<>(true,true);
 
     UndirectedGraph<Integer, Edge<Integer>> graph1 = new UndirectedGraph<>(false,false);
     UndirectedGraph<Integer, Edge<Integer>> graph2 = new UndirectedGraph<>(false,false);
@@ -60,66 +61,66 @@ public class GraphTest {
         graph1L.add(new Edge<Integer>(1,2));
         graph1M.add(new Edge<Integer>(1,2));
         graph1LM.add(new Edge<Integer>(1,2));
-        digraph1.add(new Edge<Integer>(1,2));
-        digraph1L.add(new Edge<Integer>(1,2));
-        digraph1M.add(new Edge<Integer>(1,2));
-        digraph1LM.add(new Edge<Integer>(1,2));
+        digraph1.add(new WeightedEdge<Integer>(1,2,-1.0));
+        digraph1L.add(new WeightedEdge<Integer>(1,2,-1.0));
+        digraph1M.add(new WeightedEdge<Integer>(1,2,-1.0));
+        digraph1LM.add(new WeightedEdge<Integer>(1,2,-1.0));
 
         graph1.add(new Edge<Integer>(3,2));
         graph1L.add(new Edge<Integer>(3,2));
         graph1M.add(new Edge<Integer>(3,2));
         graph1LM.add(new Edge<Integer>(3,2));
-        digraph1.add(new Edge<Integer>(3,2));
-        digraph1L.add(new Edge<Integer>(3,2));
-        digraph1M.add(new Edge<Integer>(3,2));
-        digraph1LM.add(new Edge<Integer>(3,2));
+        digraph1.add(new WeightedEdge<Integer>(3,2,1.0));
+        digraph1L.add(new WeightedEdge<Integer>(3,2,1.0));
+        digraph1M.add(new WeightedEdge<Integer>(3,2,1.0));
+        digraph1LM.add(new WeightedEdge<Integer>(3,2,1.0));
 
         graph1.add(new Edge<Integer>(3,1));
         graph1L.add(new Edge<Integer>(3,1));
         graph1M.add(new Edge<Integer>(3,1));
         graph1LM.add(new Edge<Integer>(3,1));
-        digraph1.add(new Edge<Integer>(3,1));
-        digraph1L.add(new Edge<Integer>(3,1));
-        digraph1M.add(new Edge<Integer>(3,1));
-        digraph1LM.add(new Edge<Integer>(3,1));
+        digraph1.add(new WeightedEdge<Integer>(3,1,1.0));
+        digraph1L.add(new WeightedEdge<Integer>(3,1,1.0));
+        digraph1M.add(new WeightedEdge<Integer>(3,1,1.0));
+        digraph1LM.add(new WeightedEdge<Integer>(3,1,1.0));
 
         graph1.add(new Edge<Integer>(3,4));
         graph1L.add(new Edge<Integer>(3,4));
         graph1M.add(new Edge<Integer>(3,4));
         graph1LM.add(new Edge<Integer>(3,4));
-        digraph1.add(new Edge<Integer>(3,4));
-        digraph1L.add(new Edge<Integer>(3,4));
-        digraph1M.add(new Edge<Integer>(3,4));
-        digraph1LM.add(new Edge<Integer>(3,4));
+        digraph1.add(new WeightedEdge<Integer>(3,4,-5.0));
+        digraph1L.add(new WeightedEdge<Integer>(3,4,-5.0));
+        digraph1M.add(new WeightedEdge<Integer>(3,4,-5.0));
+        digraph1LM.add(new WeightedEdge<Integer>(3,4,-5.0));
 
         graph1.add(new Edge<Integer>(4,5));
         graph1L.add(new Edge<Integer>(4,5));
         graph1M.add(new Edge<Integer>(4,5));
         graph1LM.add(new Edge<Integer>(4,5));
-        digraph1.add(new Edge<Integer>(4,5));
-        digraph1L.add(new Edge<Integer>(4,5));
-        digraph1M.add(new Edge<Integer>(4,5));
-        digraph1LM.add(new Edge<Integer>(4,5));
+        digraph1.add(new WeightedEdge<Integer>(4,5,6.0));
+        digraph1L.add(new WeightedEdge<Integer>(4,5,6.0));
+        digraph1M.add(new WeightedEdge<Integer>(4,5,6.0));
+        digraph1LM.add(new WeightedEdge<Integer>(4,5,6.0));
 
         graph1.add(new Edge<Integer>(1,5));
         graph1L.add(new Edge<Integer>(1,5));
         graph1M.add(new Edge<Integer>(1,5));
         graph1LM.add(new Edge<Integer>(1,5));
-        digraph1.add(new Edge<Integer>(1,5));
-        digraph1L.add(new Edge<Integer>(1,5));
-        digraph1M.add(new Edge<Integer>(1,5));
-        digraph1LM.add(new Edge<Integer>(1,5));
+        digraph1.add(new WeightedEdge<Integer>(1,5,3.0));
+        digraph1L.add(new WeightedEdge<Integer>(1,5,3.0));
+        digraph1M.add(new WeightedEdge<Integer>(1,5,3.0));
+        digraph1LM.add(new WeightedEdge<Integer>(1,5,3.0));
 
         //loops
         graph1L.add(new Edge<Integer>(1,1));
         graph1LM.add(new Edge<Integer>(1,1));
-        digraph1L.add(new Edge<Integer>(1,1));
-        digraph1LM.add(new Edge<Integer>(1,1));
+        digraph1L.add(new WeightedEdge<Integer>(1,1,-4.0));
+        digraph1LM.add(new WeightedEdge<Integer>(1,1,-4.0));
         //multis
         graph1M.add(new Edge<Integer>(4,3));
         graph1LM.add(new Edge<Integer>(4,3));
-        digraph1M.add(new Edge<Integer>(4,3));
-        digraph1LM.add(new Edge<Integer>(4,3));
+        digraph1M.add(new WeightedEdge<Integer>(4,3,1.0));
+        digraph1LM.add(new WeightedEdge<Integer>(4,3,1.0));
     }
 
     private void initialise2() {
@@ -127,55 +128,55 @@ public class GraphTest {
         graph2L.add(new Edge<Integer>(1,2));
         graph2M.add(new Edge<Integer>(1,2));
         graph2LM.add(new Edge<Integer>(1,2));
-        digraph2.add(new Edge<Integer>(1,2));
-        digraph2L.add(new Edge<Integer>(1,2));
-        digraph2M.add(new Edge<Integer>(1,2));
-        digraph2LM.add(new Edge<Integer>(1,2));
+        digraph2.add(new WeightedEdge<Integer>(1,2,-1.0));
+        digraph2L.add(new WeightedEdge<Integer>(1,2,-1.0));
+        digraph2M.add(new WeightedEdge<Integer>(1,2,-1.0));
+        digraph2LM.add(new WeightedEdge<Integer>(1,2,-1.0));
 
         graph2.add(new Edge<Integer>(3,2));
         graph2L.add(new Edge<Integer>(3,2));
         graph2M.add(new Edge<Integer>(3,2));
         graph2LM.add(new Edge<Integer>(3,2));
-        digraph2.add(new Edge<Integer>(3,2));
-        digraph2L.add(new Edge<Integer>(3,2));
-        digraph2M.add(new Edge<Integer>(3,2));
-        digraph2LM.add(new Edge<Integer>(3,2));
+        digraph2.add(new WeightedEdge<Integer>(3,2,1.0));
+        digraph2L.add(new WeightedEdge<Integer>(3,2,1.0));
+        digraph2M.add(new WeightedEdge<Integer>(3,2,1.0));
+        digraph2LM.add(new WeightedEdge<Integer>(3,2,1.0));
 
         graph2.add(new Edge<Integer>(3,1));
         graph2L.add(new Edge<Integer>(3,1));
         graph2M.add(new Edge<Integer>(3,1));
         graph2LM.add(new Edge<Integer>(3,1));
-        digraph2.add(new Edge<Integer>(3,1));
-        digraph2L.add(new Edge<Integer>(3,1));
-        digraph2M.add(new Edge<Integer>(3,1));
-        digraph2LM.add(new Edge<Integer>(3,1));
+        digraph2.add(new WeightedEdge<Integer>(3,1,1.0));
+        digraph2L.add(new WeightedEdge<Integer>(3,1,1.0));
+        digraph2M.add(new WeightedEdge<Integer>(3,1,1.0));
+        digraph2LM.add(new WeightedEdge<Integer>(3,1,1.0));
 
         graph2.add(new Edge<Integer>(3,4));
         graph2L.add(new Edge<Integer>(3,4));
         graph2M.add(new Edge<Integer>(3,4));
         graph2LM.add(new Edge<Integer>(3,4));
-        digraph2.add(new Edge<Integer>(3,4));
-        digraph2L.add(new Edge<Integer>(3,4));
-        digraph2M.add(new Edge<Integer>(3,4));
-        digraph2LM.add(new Edge<Integer>(3,4));
+        digraph2.add(new WeightedEdge<Integer>(3,4,-5.0));
+        digraph2L.add(new WeightedEdge<Integer>(3,4,-5.0));
+        digraph2M.add(new WeightedEdge<Integer>(3,4,-5.0));
+        digraph2LM.add(new WeightedEdge<Integer>(3,4,-5.0));
 
         graph2.add(new Edge<Integer>(4,5));
         graph2L.add(new Edge<Integer>(4,5));
         graph2M.add(new Edge<Integer>(4,5));
         graph2LM.add(new Edge<Integer>(4,5));
-        digraph2.add(new Edge<Integer>(4,5));
-        digraph2L.add(new Edge<Integer>(4,5));
-        digraph2M.add(new Edge<Integer>(4,5));
-        digraph2LM.add(new Edge<Integer>(4,5));
+        digraph2.add(new WeightedEdge<Integer>(4,5,6.0));
+        digraph2L.add(new WeightedEdge<Integer>(4,5,6.0));
+        digraph2M.add(new WeightedEdge<Integer>(4,5,6.0));
+        digraph2LM.add(new WeightedEdge<Integer>(4,5,6.0));
 
         graph2.add(new Edge<Integer>(1,5));
         graph2L.add(new Edge<Integer>(1,5));
         graph2M.add(new Edge<Integer>(1,5));
         graph2LM.add(new Edge<Integer>(1,5));
-        digraph2.add(new Edge<Integer>(1,5));
-        digraph2L.add(new Edge<Integer>(1,5));
-        digraph2M.add(new Edge<Integer>(1,5));
-        digraph2LM.add(new Edge<Integer>(1,5));
+        digraph2.add(new WeightedEdge<Integer>(1,5,3.0));
+        digraph2L.add(new WeightedEdge<Integer>(1,5,3.0));
+        digraph2M.add(new WeightedEdge<Integer>(1,5,3.0));
+        digraph2LM.add(new WeightedEdge<Integer>(1,5,3.0));
         
         
         // for graph 2
@@ -183,103 +184,103 @@ public class GraphTest {
         graph2L.add(new Edge<Integer>(6,3));
         graph2M.add(new Edge<Integer>(6,3));
         graph2LM.add(new Edge<Integer>(6,3));
-        digraph2.add(new Edge<Integer>(6,3));
-        digraph2L.add(new Edge<Integer>(6,3));
-        digraph2M.add(new Edge<Integer>(6,3));
-        digraph2LM.add(new Edge<Integer>(6,3));
+        digraph2.add(new WeightedEdge<Integer>(6,3,2.0));
+        digraph2L.add(new WeightedEdge<Integer>(6,3,2.0));
+        digraph2M.add(new WeightedEdge<Integer>(6,3,2.0));
+        digraph2LM.add(new WeightedEdge<Integer>(6,3,2.0));
 
         graph2.add(new Edge<Integer>(6,7));
         graph2L.add(new Edge<Integer>(6,7));
         graph2M.add(new Edge<Integer>(6,7));
         graph2LM.add(new Edge<Integer>(6,7));
-        digraph2.add(new Edge<Integer>(6,7));
-        digraph2L.add(new Edge<Integer>(6,7));
-        digraph2M.add(new Edge<Integer>(6,7));
-        digraph2LM.add(new Edge<Integer>(6,7));
+        digraph2.add(new WeightedEdge<Integer>(6,7,3.0));
+        digraph2L.add(new WeightedEdge<Integer>(6,7,3.0));
+        digraph2M.add(new WeightedEdge<Integer>(6,7,3.0));
+        digraph2LM.add(new WeightedEdge<Integer>(6,7,3.0));
 
         graph2.add(new Edge<Integer>(6,8));
         graph2L.add(new Edge<Integer>(6,8));
         graph2M.add(new Edge<Integer>(6,8));
         graph2LM.add(new Edge<Integer>(6,8));
-        digraph2.add(new Edge<Integer>(6,8));
-        digraph2L.add(new Edge<Integer>(6,8));
-        digraph2M.add(new Edge<Integer>(6,8));
-        digraph2LM.add(new Edge<Integer>(6,8));
+        digraph2.add(new WeightedEdge<Integer>(6,8,3.0));
+        digraph2L.add(new WeightedEdge<Integer>(6,8,3.0));
+        digraph2M.add(new WeightedEdge<Integer>(6,8,3.0));
+        digraph2LM.add(new WeightedEdge<Integer>(6,8,3.0));
 
         graph2.add(new Edge<Integer>(10,9));
         graph2L.add(new Edge<Integer>(10,9));
         graph2M.add(new Edge<Integer>(10,9));
         graph2LM.add(new Edge<Integer>(10,9));
-        digraph2.add(new Edge<Integer>(10,9));
-        digraph2L.add(new Edge<Integer>(10,9));
-        digraph2M.add(new Edge<Integer>(10,9));
-        digraph2LM.add(new Edge<Integer>(10,9));
+        digraph2.add(new WeightedEdge<Integer>(10,9,1.0));
+        digraph2L.add(new WeightedEdge<Integer>(10,9,1.0));
+        digraph2M.add(new WeightedEdge<Integer>(10,9,1.0));
+        digraph2LM.add(new WeightedEdge<Integer>(10,9,1.0));
         
         //loops
         graph2L.add(new Edge<Integer>(1,1));
         graph2LM.add(new Edge<Integer>(1,1));
-        digraph2L.add(new Edge<Integer>(1,1));
-        digraph2LM.add(new Edge<Integer>(1,1));
+        digraph2L.add(new WeightedEdge<Integer>(1,1,-4.0));
+        digraph2LM.add(new WeightedEdge<Integer>(1,1,-4.0));
 
         
         //multis
         graph2M.add(new Edge<Integer>(4,3));
         graph2LM.add(new Edge<Integer>(4,3));
-        digraph2M.add(new Edge<Integer>(4,3));
-        digraph2LM.add(new Edge<Integer>(4,3));
+        digraph2M.add(new WeightedEdge<Integer>(4,3,10.0));
+        digraph2LM.add(new WeightedEdge<Integer>(4,3,10.0));
 
         graph2LM.add(new Edge<Integer>(1,1));
-        digraph2LM.add(new Edge<Integer>(1,1));
+        digraph2LM.add(new WeightedEdge<Integer>(1,1,1.0));
 
         graph2M.add(new Edge<Integer>(6,7));
         graph2LM.add(new Edge<Integer>(6,7));
-        digraph2M.add(new Edge<Integer>(6,7));
-        digraph2LM.add(new Edge<Integer>(6,7));
+        digraph2M.add(new WeightedEdge<Integer>(6,7,2.0));
+        digraph2LM.add(new WeightedEdge<Integer>(6,7,2.0));
         graph2M.add(new Edge<Integer>(6,7));
         graph2LM.add(new Edge<Integer>(6,7));
-        digraph2M.add(new Edge<Integer>(6,7));
-        digraph2LM.add(new Edge<Integer>(6,7));
+        digraph2M.add(new WeightedEdge<Integer>(6,7,2.0));
+        digraph2LM.add(new WeightedEdge<Integer>(6,7,2.0));
 
         graph2M.add(new Edge<Integer>(6,8));
         graph2LM.add(new Edge<Integer>(6,8));
-        digraph2M.add(new Edge<Integer>(6,8));
-        digraph2LM.add(new Edge<Integer>(6,8));
+        digraph2M.add(new WeightedEdge<Integer>(6,8,2.0));
+        digraph2LM.add(new WeightedEdge<Integer>(6,8,2.0));
         graph2M.add(new Edge<Integer>(6,8));
         graph2LM.add(new Edge<Integer>(6,8));
-        digraph2M.add(new Edge<Integer>(6,8));
-        digraph2LM.add(new Edge<Integer>(6,8));
+        digraph2M.add(new WeightedEdge<Integer>(6,8,2.0));
+        digraph2LM.add(new WeightedEdge<Integer>(6,8,2.0));
     }
 
 
-    public DirectedGraph<Integer, Edge<Integer>> getDigraph1() {
+    public DirectedGraph<Integer, WeightedEdge<Integer>> getDigraph1() {
         return digraph1;
     }
 
-    public DirectedGraph<Integer, Edge<Integer>> getDigraph2() {
+    public DirectedGraph<Integer, WeightedEdge<Integer>> getDigraph2() {
         return digraph2;
     }
 
-    public DirectedGraph<Integer, Edge<Integer>> getDigraph1L() {
+    public DirectedGraph<Integer, WeightedEdge<Integer>> getDigraph1L() {
         return digraph1L;
     }
 
-    public DirectedGraph<Integer, Edge<Integer>> getDigraph2L() {
+    public DirectedGraph<Integer, WeightedEdge<Integer>> getDigraph2L() {
         return digraph2L;
     }
 
-    public DirectedGraph<Integer, Edge<Integer>> getDigraph1M() {
+    public DirectedGraph<Integer, WeightedEdge<Integer>> getDigraph1M() {
         return digraph1M;
     }
 
-    public DirectedGraph<Integer, Edge<Integer>> getDigraph2M() {
+    public DirectedGraph<Integer, WeightedEdge<Integer>> getDigraph2M() {
         return digraph2M;
     }
 
-    public DirectedGraph<Integer, Edge<Integer>> getDigraph1LM() {
+    public DirectedGraph<Integer, WeightedEdge<Integer>> getDigraph1LM() {
         return digraph1LM;
     }
 
-    public DirectedGraph<Integer, Edge<Integer>> getDigraph2LM() {
+    public DirectedGraph<Integer, WeightedEdge<Integer>> getDigraph2LM() {
         return digraph2LM;
     }
 
