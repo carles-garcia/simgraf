@@ -13,10 +13,12 @@ import static org.junit.Assert.assertTrue;
 
 public class BFSTest extends GraphTest {
     BFS<Integer> bfs;
+    BFS<Integer> bfs2;
 
     @Before
     public void setUp() throws Exception {
         bfs = new BFS<Integer>(getGraph1(), 3);
+        bfs2 = new BFS<Integer>(getGraph1(), 1, 2);
     }
 
     @Test
@@ -27,6 +29,9 @@ public class BFSTest extends GraphTest {
         assertEquals(0, hs.get(3).get());
         assertEquals(1, hs.get(4).get());
         assertEquals(2, hs.get(5).get());
+
+        hs = bfs2.getDistances();
+        assertEquals(-1, hs.get(4).get());
     }
 
     @Test
@@ -45,5 +50,6 @@ public class BFSTest extends GraphTest {
         for (int i : getGraph1().getVertices()) {
             assertTrue(hs.contains(i));
         }
+
     }
 }
