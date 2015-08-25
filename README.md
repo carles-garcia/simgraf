@@ -1,18 +1,18 @@
-# simgraf (CURRENTLY IN ALPHA)*
+# simgraf
 A simple graph library written in Java.
 Easily extensible.
 
-\* Graphs and algorithms are finished but haven't been tested thoroughly
+Unlike other popular Java graph libraries, <b>simgraf</b> is not aimed to graph visualization. It is aimed to provide a versatile set of graph data structures and algorithms focused on time efficiency.  
 
 This library contains 2 main packages:
-* graphs: Contains 2 graph classes and two edge classes
+* graphs: Contains 2 graph classes and 2 edge classes
     * DirectedGraph
     * UndirectedGraph
     * Edge
     * WeightedEdge
 
 
-* algorithms: contains 4 algorithms for the graphs
+* algorithms: Contains 4 algorithms for the graphs
     * BFS (Breadth-First Search)
     * DFS (Depth-First Search)
     * Bellman-Ford
@@ -22,7 +22,12 @@ For each graph the user can choose if loops are allowed and if multiple edges be
 
 The vertices can be of any type and the edges must be of class Edge/WeightedEdge or a subclass of them.
 
-###### History
-v0.1.0 Start of development - 24/7/15
+###### Development
 
-v0.2.0 Alpha release - 2/8/15
+The graphs and algorithms have been finished and are documented and tested. Some edge cases are still to be tested.
+
+If you have coded an algorithm for this library I encourage you to do a pull request.
+
+###### License
+
+BSD 3-Clause License
