@@ -24,10 +24,10 @@ public class BellmanFordTest extends GraphTest {
     public void testGetDistances() throws Exception {
         HashMap<Integer, Double> hs = bf.getDistances();
         assertEquals(1.0, hs.get(1), DELTA);
-        assertEquals(0, hs.get(2),DELTA);
+        assertEquals(1, hs.get(2),DELTA);
         assertEquals(0, hs.get(3),DELTA);
-        assertEquals(-5, hs.get(4),DELTA);
-        assertEquals(1, hs.get(5),DELTA);
+        assertEquals(5, hs.get(4),DELTA);
+        assertEquals(4, hs.get(5),DELTA);
 
     }
 
@@ -35,10 +35,10 @@ public class BellmanFordTest extends GraphTest {
     public void testGetPredecessors() throws Exception {
         HashMap<Integer,Integer> hs = bf.getPredecessors();
         assertEquals(3, (int)hs.get(1));
-        assertEquals(1, (int)hs.get(2));
+        assertEquals(3, (int)hs.get(2));
         assertEquals(null, hs.get(3));
         assertEquals(3, (int)hs.get(4));
-        assertEquals(4, (int)hs.get(5));
+        assertEquals(1, (int)hs.get(5));
 
     }
 
