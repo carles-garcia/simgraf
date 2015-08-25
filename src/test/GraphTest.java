@@ -249,4 +249,69 @@ public class GraphTest {
         digraph2M.add(new Edge<Integer>(6,8));
         digraph2LM.add(new Edge<Integer>(6,8));
     }
+
+
+    public DirectedGraph<Integer, Edge<Integer>> getDigraph1() {
+        return digraph1;
+    }
+
+    public DirectedGraph<Integer, Edge<Integer>> getDigraph2() {
+        return digraph2;
+    }
+
+    public DirectedGraph<Integer, Edge<Integer>> getDigraph1L() {
+        return digraph1L;
+    }
+
+    public DirectedGraph<Integer, Edge<Integer>> getDigraph2L() {
+        return digraph2L;
+    }
+
+    public DirectedGraph<Integer, Edge<Integer>> getDigraph1M() {
+        return digraph1M;
+    }
+
+    public DirectedGraph<Integer, Edge<Integer>> getDigraph2M() {
+        return digraph2M;
+    }
+
+    public DirectedGraph<Integer, Edge<Integer>> getDigraph1LM() {
+        return digraph1LM;
+    }
+
+    public DirectedGraph<Integer, Edge<Integer>> getDigraph2LM() {
+        return digraph2LM;
+    }
+
+    public UndirectedGraph<Integer, Edge<Integer>> getGraph1() {
+        return graph1;
+    }
+
+    public UndirectedGraph<Integer, Edge<Integer>> getGraph2() {
+        return graph2;
+    }
+
+    public UndirectedGraph<Integer, Edge<Integer>> getGraph1L() {
+        return graph1L;
+    }
+
+    public UndirectedGraph<Integer, Edge<Integer>> getGraph2L() {
+        return graph2L;
+    }
+
+    public UndirectedGraph<Integer, Edge<Integer>> getGraph1M() {
+        return graph1M;
+    }
+
+    public UndirectedGraph<Integer, Edge<Integer>> getGraph2M() {
+        return graph2M;
+    }
+
+    public UndirectedGraph<Integer, Edge<Integer>> getGraph1LM() {
+        return graph1LM;
+    }
+
+    public UndirectedGraph<Integer, Edge<Integer>> getGraph2LM() {
+        return graph2LM;
+    }
 }
