@@ -24,7 +24,7 @@ The vertices can be of any type and the edges must be of class Edge/WeightedEdge
 
 ###### Development
 
-The graphs and algorithms have been finished and are documented and tested. Some edge cases are still to be tested.
+The library is ready for production. It has been thoroughly tested and documented, although some documentation has to be polished.
 
 If you have coded an algorithm for this library I encourage you to do a pull request.
 
