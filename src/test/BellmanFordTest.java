@@ -6,9 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.HashMap;
-import java.util.concurrent.atomic.AtomicInteger;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class BellmanFordTest extends GraphTest {
     BellmanFord<Integer, WeightedEdge<Integer>> bf;

@@ -1,6 +1,5 @@
 package test;
 
-import algorithms.BFS;
 import algorithms.Dijkstra;
 import graphs.WeightedEdge;
 import org.junit.Before;

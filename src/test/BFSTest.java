@@ -1,8 +1,6 @@
 package test;
 
 import algorithms.BFS;
-import graphs.Edge;
-import graphs.UndirectedGraph;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,7 +8,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class BFSTest extends GraphTest {
     BFS<Integer> bfs;
