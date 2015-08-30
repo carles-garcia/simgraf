@@ -22,9 +22,9 @@ For each graph the user can choose if loops are allowed and if multiple edges be
 
 The vertices can be of any type and the edges must be of class Edge/WeightedEdge or a subclass of them.
 
-###### Development
+###### Development & contributing
 
-The library is ready for production. It has been thoroughly tested and documented, although some documentation has to be polished.
+The library is ready for production. It has been thoroughly tested and documented.
 
 If you have coded an algorithm for this library I encourage you to do a pull request.
 
