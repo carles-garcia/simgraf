@@ -79,7 +79,7 @@ public class UndirectedGraph<V, E extends Edge<V>> extends AbstractGraph<V,E> {
     }
 
     public void remove(E edge) {
-        // must update adjacencies
+
         Objects.requireNonNull(edge, Errors.REMOVE_NULL_EDGE.toString());
         if (!areAdjacent(edge.getVertexA(), edge.getVertexB()))
             throw new IllegalArgumentException(Errors.EDGE_NOT_CONTAINED.toString());
@@ -147,8 +147,7 @@ public class UndirectedGraph<V, E extends Edge<V>> extends AbstractGraph<V,E> {
     /* Original methods */
 
     /**
-     * Returns the degree of a vertex
-     * (number of incident edges. Loops count as two)
+     * Returns the degree of a vertex (number of incident edges. Loops count as two)
      * @param vertex to get degree of
      * @return integer indicating the degree
      */

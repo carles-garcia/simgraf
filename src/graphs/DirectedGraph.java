@@ -27,7 +27,7 @@ public class DirectedGraph<V, E extends Edge<V>> extends AbstractGraph<V,E> {
     }
 
     /* If the vertex isn't contained in the graph (and this is true for a null reference) throws
-    an IllegalArgumenException
+    an IllegalArgumentException
      */
     private void checkContained(V vertex) {
         if (!contains(vertex)) throw new IllegalArgumentException(Errors.VERTEX_NOT_CONTAINED.toString());
@@ -93,7 +93,7 @@ public class DirectedGraph<V, E extends Edge<V>> extends AbstractGraph<V,E> {
     }
 
     public void remove(E edge) {
-        // must update adjacencies
+
         Objects.requireNonNull(edge, Errors.REMOVE_NULL_EDGE.toString());
         if (!areAdjacent(edge.getVertexA(), edge.getVertexB()))
             throw new IllegalArgumentException(Errors.EDGE_NOT_CONTAINED.toString());
@@ -178,7 +178,7 @@ public class DirectedGraph<V, E extends Edge<V>> extends AbstractGraph<V,E> {
     }
 
     /**
-     * Returns the outdegree of a vertex (number of ougoing edges)
+     * Returns the outdegree of a vertex (number of outgoing edges)
      * @param vertex to get outdegree of
      * @return integer indicating outdegree of the vertex
      */

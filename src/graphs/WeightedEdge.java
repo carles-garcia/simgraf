@@ -9,9 +9,8 @@ public class WeightedEdge<V> extends Edge<V>  {
 
     /**
      * Basic constructor
-     * In directed graphs vertexA represents the origin while vertexB represents
-     * the destination.
-     * In undirected graphs it doesn't matter.
+     * <p> In directed graphs vertexA represents the origin while vertexB represents
+     * the destination. In undirected graphs it doesn't matter.
      * @param vertexA (vertex origin for directed graphs)
      * @param vertexB (vertex destination for directed graphs)
      * @param weight double indicating the weight

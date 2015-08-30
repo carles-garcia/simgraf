@@ -13,9 +13,8 @@ public class Edge<V> {
 
     /**
      * Basic constructor
-     * In directed graphs vertexA represents the origin while vertexB represents
-     * the destination.
-     * In undirected graphs it doesn't matter.
+     * <p> In directed graphs vertexA represents the origin while vertexB represents
+     * the destination. In undirected graphs it doesn't matter.
      * @param vertexA (vertex origin for directed graphs)
      * @param vertexB (vertex destination for directed graphs)
      */
@@ -34,7 +33,7 @@ public class Edge<V> {
     }
 
     /**
-     * Get endpoints of the edges
+     * Get endpoints of an edge
      * @return list containing vertexA in position 0 and vertexB in position 1.
      */
     public List<V> getEndpoints() {

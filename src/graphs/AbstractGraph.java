@@ -40,19 +40,19 @@ public abstract class AbstractGraph<V, E extends Edge<V>> {
 
     /**
      * Remove vertex and its incident edges from the graph
-     * @param vertex has to be contained in the graph
+     * @param vertex must be contained in the graph
      */
     public abstract void remove(V vertex);
 
     /**
      * Add an edge to the graph.
-     * @param edge must not be null. Its endpoints have to be contained in the graph.
+     * @param edge must not be null. Its endpoints must be contained in the graph.
      */
     public abstract void add(E edge);
 
     /**
      * Remove edge from the graph
-     * @param edge must not be null. Has to be contained in the graph.
+     * @param edge must not be null. Must be contained in the graph.
      */
     public abstract void remove(E edge);
 
@@ -67,8 +67,8 @@ public abstract class AbstractGraph<V, E extends Edge<V>> {
     /**
      * Returns true if two vertices are adjacent
      * (if there is an edge between the two vertices)
-     * @param vertexA has to be contained in the graph.
-     * @param vertexB has to be contained in the graph.
+     * @param vertexA must be contained in the graph.
+     * @param vertexB must be contained in the graph.
      * @return true if vertexA and vertexB are adjacent.
      */
     public abstract boolean areAdjacent(V vertexA, V vertexB);
@@ -94,7 +94,9 @@ public abstract class AbstractGraph<V, E extends Edge<V>> {
 
     /**
      * Get neighbours of a vertex
-     * A neighbour of a vertex is another vertex that can be reached from the first through an edge.
+     * <p>A neighbour of a vertex is another vertex that can be reached from the first through an edge.
+     * <p>In a directed graph, a vertex B can only be reached from vertex A if there is and edge with origin A
+     * and destination B
      * @param vertex to get neighbours of
      * @return collection containing neighbours of the vertex
      */
