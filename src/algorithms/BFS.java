@@ -18,7 +18,6 @@ public class BFS<V> {
     private HashMap<V, V> predecessors;
 
     private final int INFINITY = -1;
-    //todo: throw exceptions in algorithms
 
     /**
      * Traverses all the graph starting from source vertex

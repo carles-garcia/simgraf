@@ -51,7 +51,7 @@ public class DirectedGraphTest extends GraphTest {
 
     @Test
     public void testGetEdges() throws Exception {
-        Set<WeightedEdge<Integer>> hs = g.getEdges(); //todo HashSet??
+        Set<WeightedEdge<Integer>> hs = g.getEdges();
         for (WeightedEdge<Integer> e : hs) {
             if (e.getWeight() == 10) {
                 if (e.getVertexA() != 4 || e.getVertexB() != 3) fail();

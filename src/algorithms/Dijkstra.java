@@ -18,7 +18,6 @@ public class Dijkstra<V, E extends WeightedEdge<V>> {
     private HashMap<V, V> predecessors;
     private HashSet<V> visited;
     private final Double INFINITY = Double.POSITIVE_INFINITY;
-    //todo: graph iterators?
 
     /**
      * Execute algorithm starting from source vertex

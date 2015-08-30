@@ -31,7 +31,6 @@ public class BellmanFord<V, E extends WeightedEdge<V>> {
         }
         distances.put(source, 0.0);
 
-        // todo: possible optimisation? starting with source's edges
         for (int i = 0; i < graph.order()-1; ++i) {
             boolean change = false;
             for (E edge : graph.getEdges()) {
