@@ -10,7 +10,7 @@ import java.util.Set;
 import static org.junit.Assert.*;
 
 /*
-This class is for testing methods not tested in algorithm tests
+This class is for testing methods not tested in algorithms' tests
  */
 public class DirectedGraphTest extends GraphTest {
     DirectedGraph<Integer, WeightedEdge<Integer>> g;

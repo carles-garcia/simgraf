@@ -5,6 +5,9 @@ import graphs.Edge;
 import graphs.UndirectedGraph;
 import graphs.WeightedEdge;
 
+/*
+This class contains graphs to be used for tests
+ */
 public class GraphTest {
     static final double DELTA = 1e-15;
 
