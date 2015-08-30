@@ -22,8 +22,8 @@ public class Dijkstra<V, E extends WeightedEdge<V>> {
 
     /**
      * Execute algorithm starting from source vertex
-     * @param graph
-     * @param source
+     * @param graph graph to traverse
+     * @param source vertex to start from
      */
     public Dijkstra(DirectedGraph<V,E> graph, V source) {
         distances = new HashMap<>();
@@ -59,14 +59,27 @@ public class Dijkstra<V, E extends WeightedEdge<V>> {
         }
     }
 
+    /**
+     * Get map containing the shortest distance from the source vertex to each vertex.
+     * @return HashMap of the vertices as keys and the distances as values
+     */
     public HashMap<V, Double> getDistances() {
         return distances;
     }
 
+    /**
+     * Get map containing the predecessor of each vertex in the shortest path from the source vertex.
+     * If the predecessor is null, there is no path.
+     * @return HashMap of the vertices as keys and their predecessors as values
+     */
     public HashMap<V, V> getPredecessors() {
         return predecessors;
     }
 
+    /**
+     * Get set of the visited vertices
+     * @return HashSet of the visited vertices
+     */
     public HashSet<V> getVisited() {
         return visited;
     }

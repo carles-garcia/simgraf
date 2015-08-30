@@ -8,7 +8,7 @@ import java.util.HashMap;
 /**
  * Bellman-Ford algorithm
  * @param <V> type of the vertices of the graph
- * @param <E> type of the edges of the graph. Have to extend {@link WeightedEdge}
+ * @param <E> type of the edges of the graph. Must extend {@link WeightedEdge}
  */
 public class BellmanFord<V, E extends WeightedEdge<V>> {
     private HashMap<V, Double> distances;
@@ -18,8 +18,8 @@ public class BellmanFord<V, E extends WeightedEdge<V>> {
 
     /**
      * Execute the Bellman-Ford algorithm starting from the source vertex.
-     * @param graph
-     * @param source
+     * @param graph to traverse
+     * @param source vertex to start from
      */
     public BellmanFord(DirectedGraph<V,E> graph, V source) {
         distances = new HashMap<>();
@@ -31,7 +31,7 @@ public class BellmanFord<V, E extends WeightedEdge<V>> {
         }
         distances.put(source, 0.0);
 
-        // possible optimisation? starting with source's edges
+        // todo: possible optimisation? starting with source's edges
         for (int i = 0; i < graph.order()-1; ++i) {
             boolean change = false;
             for (E edge : graph.getEdges()) {
@@ -56,10 +56,19 @@ public class BellmanFord<V, E extends WeightedEdge<V>> {
 
     }
 
+    /**
+     * Get map containing the shortest distance from the source vertex to each vertex.
+     * @return HashMap of the vertices as keys and the distances as values
+     */
     public HashMap<V, Double> getDistances() {
         return distances;
     }
 
+    /**
+     * Get map containing the predecessor of each vertex in the shortest path from the source vertex.
+     * If the predecessor is null, there is no path.
+     * @return HashMap of the vertices as keys and their predecessors as values
+     */
     public HashMap<V, V> getPredecessors() {
         return predecessors;
     }

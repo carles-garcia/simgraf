@@ -81,7 +81,7 @@ public class DFS<V> {
     }
 
     /**
-     * Get map containing the distance from the source vertex of each vertex.
+     * Get map containing the distance from the source vertex to each vertex.
      * @return HashMap of the vertices as keys and the distances as values
      */
     public HashMap<V, AtomicInteger> getDistances() {
@@ -89,7 +89,7 @@ public class DFS<V> {
     }
 
     /**
-     * Get map containing the predecessor of each vertex in the shortest path to the source vertex.
+     * Get map containing the predecessor of each vertex in the shortest path from the source vertex.
      * If the predecessor is null, there is no path or the graph wasn't fully traversed.
      * @return HashMap of the vertices as keys and their predecessors as values
      */
