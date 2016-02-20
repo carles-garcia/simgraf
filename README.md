@@ -1,4 +1,7 @@
 # simgraf
+
+[Download simgraf v1.1.0](https://github.com/carles-garcia/)
+
 A simple graph library written in Java.
 Easily extensible.
 
@@ -30,4 +33,5 @@ If you have coded an algorithm for this library I encourage you to do a pull req
 
 ###### License
 
-BSD 3-Clause License
+This library is free software: you can redistribute it and/or modify
+it under the terms of the <b>Mozilla Public License Version 2.0</b>

@@ -1,3 +1,8 @@
+/*
+Copyright (C) 2015,2016  Carles Garcia Cabot  (github.com/carles-garcia)
+This file is part of simgraf, a simple graph library written in Java. 
+Released under the Mozilla Public License v2 (see COPYING.txt)
+*/
 package algorithms;
 
 import graphs.DirectedGraph;
