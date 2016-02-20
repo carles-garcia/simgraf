@@ -1,6 +1,6 @@
 # simgraf
 
-[Download simgraf v1.1.0](https://github.com/carles-garcia/)
+[Download simgraf v1.1.0](https://github.com/carles-garcia/simgraf/releases/tag/v1.1.0)
 
 A simple graph library written in Java.
 Easily extensible.
